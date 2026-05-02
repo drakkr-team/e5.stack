@@ -1,6 +1,6 @@
 // biome-ignore-all lint/suspicious/noConsole: Dev tools
 
-import { readFileSync, writeFileSync } from "node:fs";
+import { readFileSync, renameSync, unlinkSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { colors, fonts } from "../src/tokens.ts";
@@ -40,7 +40,30 @@ function buildCss() {
 	];
 
 	for (const [fontName, fontValue] of Object.entries(fonts)) {
-		lines.push(`\t--font-${fontName}: ${fontValue};`);
+		const singleLine = `\t--font-${fontName}: ${fontValue};`;
+		// Biome lineWidth=100, tabWidth=2: visual width of \t = 2
+		const visualLength = singleLine.replace(/\t/g, "  ").length;
+		if (visualLength <= 100) {
+			lines.push(singleLine);
+		} else {
+			// Wrap: property name on its own line, values with double-tab indent
+			lines.push(`\t--font-${fontName}:`);
+			const items = fontValue.split(", ");
+			let currentLine = "\t\t";
+			for (let i = 0; i < items.length; i++) {
+				const item = items[i];
+				const isLast = i === items.length - 1;
+				const candidate = currentLine === "\t\t" ? currentLine + item : `${currentLine}, ${item}`;
+				const candidateVisual = (candidate + (isLast ? ";" : ",")).replace(/\t/g, "  ").length;
+				if (candidateVisual > 100 && currentLine !== "\t\t") {
+					lines.push(`${currentLine},`);
+					currentLine = `\t\t${item}`;
+				} else {
+					currentLine = currentLine === "\t\t" ? currentLine + item : `${currentLine}, ${item}`;
+				}
+			}
+			lines.push(`${currentLine};`);
+		}
 	}
 
 	for (const [familyName, family] of Object.entries(colors)) {
@@ -63,7 +86,7 @@ function buildCss() {
 	lines.push("\t}");
 	lines.push("}");
 	lines.push("");
-	lines.push("@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));");
+	lines.push('@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));');
 	lines.push("");
 	lines.push(":root {");
 
@@ -77,7 +100,7 @@ function buildCss() {
 
 	lines.push("}");
 	lines.push("");
-	lines.push("[data-theme=dark] {");
+	lines.push('[data-theme="dark"] {');
 
 	for (const [familyName, family] of Object.entries(colors)) {
 		for (const shadeName of Object.keys(family)
@@ -108,7 +131,16 @@ function main() {
 		}
 
 		if (currentCss !== nextCss) {
-			writeFileSync(OUTPUT_PATH, nextCss, "utf-8");
+			const tmpPath = `${OUTPUT_PATH}.tmp`;
+			writeFileSync(tmpPath, nextCss, "utf-8");
+			try {
+				renameSync(tmpPath, OUTPUT_PATH);
+			} catch (error) {
+				try {
+					unlinkSync(tmpPath);
+				} catch (_unlinkError) {}
+				throw error;
+			}
 		}
 
 		console.timeEnd(" \x1b[32m✓\x1b[0m Generated tailwind.css in ");

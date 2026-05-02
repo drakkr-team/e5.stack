@@ -4,9 +4,13 @@
  */
 
 @theme inline {
-	--font-sans: "ui-sans-serif", "system-ui", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	--font-sans:
+		"ui-sans-serif", "system-ui", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji",
+		"Segoe UI Symbol", "Noto Color Emoji";
 	--font-serif: "ui-serif", "Georgia", "Cambria", "Times New Roman", "Times", "serif";
-	--font-mono: "ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", "monospace";
+	--font-mono:
+		"ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono",
+		"Courier New", "monospace";
 	--color-gray-1: var(--gray-1);
 	--color-gray-2: var(--gray-2);
 	--color-gray-3: var(--gray-3);
@@ -391,7 +395,7 @@
 	}
 }
 
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 :root {
 	--gray-1: #fcfcfc;
@@ -768,7 +772,7 @@
 	--orange-12: #582d1d;
 }
 
-[data-theme=dark] {
+[data-theme="dark"] {
 	--gray-1: #111111;
 	--gray-2: #191919;
 	--gray-3: #222222;
