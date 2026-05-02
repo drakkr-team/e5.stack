@@ -6,6 +6,9 @@
 		"./tokens": "./src/tokens.ts"
 	},
 	"scripts": {
+		"generate:tailwind": "node scripts/generate-tailwind.js",
+		"build": "pnpm generate:tailwind",
+		"dev": "node --watch scripts/generate-tailwind.js",
 		"typecheck": "tsc --noEmit"
 	},
 	"devDependencies": {
