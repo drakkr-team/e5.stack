@@ -8,5 +8,9 @@ export const controllers = {
     profile: {
       View: () => import('#domains/user_management/profile/controllers/view.controller'),
     },
+    authentication: {
+      LoginWithCredentials: () => import('#domains/user_management/authentication/controllers/login_with_credentials.controller'),
+      Logout: () => import('#domains/user_management/authentication/controllers/logout.controller'),
+    },
   },
 }

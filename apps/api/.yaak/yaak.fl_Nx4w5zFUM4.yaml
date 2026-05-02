@@ -1,0 +1,13 @@
+type: folder
+model: folder
+id: fl_Nx4w5zFUM4
+createdAt: 2026-05-02T13:27:32.126640
+updatedAt: 2026-05-02T13:27:43.568226
+workspaceId: wk_bpdV78RkSs
+folderId: fl_esMbMfkXMX
+authentication: {}
+authenticationType: null
+description: ''
+headers: []
+name: Profile
+sortPriority: 1000.0

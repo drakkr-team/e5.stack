@@ -1,0 +1,18 @@
+type: http_request
+model: http_request
+id: rq_vc57qErnNp
+createdAt: 2026-05-02T13:27:46.607808
+updatedAt: 2026-05-02T13:27:55.492595
+workspaceId: wk_bpdV78RkSs
+folderId: fl_Nx4w5zFUM4
+authentication: {}
+authenticationType: null
+body: {}
+bodyType: null
+description: ''
+headers: []
+method: GET
+name: View
+sortPriority: -1777728466606.0
+url: ${[ BASE_URL ]}/profile
+urlParameters: []

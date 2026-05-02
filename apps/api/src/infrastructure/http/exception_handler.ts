@@ -1,5 +1,8 @@
+import { errors as authErrors } from "@adonisjs/auth";
 import { ExceptionHandler, HttpContext } from "@adonisjs/core/http";
 import app from "@adonisjs/core/services/app";
+import InvalidCredentialsException from "#domains/user_management/authentication/exceptions/invalid_credentials.exception";
+import UnauthenticatedException from "#domains/user_management/authentication/exceptions/unauthenticated.exception";
 
 export default class HttpExceptionHandler extends ExceptionHandler {
 	/**
@@ -20,6 +23,14 @@ export default class HttpExceptionHandler extends ExceptionHandler {
 	 * response to the client
 	 */
 	async handle(error: unknown, ctx: HttpContext) {
+		if (error instanceof authErrors.E_INVALID_CREDENTIALS) {
+			throw new InvalidCredentialsException();
+		}
+
+		if (error instanceof authErrors.E_UNAUTHORIZED_ACCESS) {
+			throw new UnauthenticatedException();
+		}
+
 		return super.handle(error, ctx);
 	}
 
