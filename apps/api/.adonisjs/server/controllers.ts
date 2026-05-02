@@ -3,4 +3,10 @@
  * DO NOT EDIT manually
  */
 
-export const controllers = {}
+export const controllers = {
+  userManagement: {
+    profile: {
+      View: () => import('#domains/user_management/profile/controllers/view.controller'),
+    },
+  },
+}

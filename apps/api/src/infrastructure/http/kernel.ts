@@ -12,7 +12,12 @@ server.use([
 router.use([
 	() => import("@adonisjs/session/session_middleware"),
 	() => import("@adonisjs/core/bodyparser_middleware"),
+	() => import("@adonisjs/auth/initialize_auth_middleware"),
+	() => import("#domains/user_management/auth/middleware/silent_auth_middleware"),
 	() => import("@tuyau/superjson/superjson_middleware"),
 ]);
 
-export const middleware = router.named({});
+export const middleware = router.named({
+	auth: () => import("#domains/user_management/auth/middleware/auth_middleware"),
+	guest: () => import("#domains/user_management/auth/middleware/guest_middleware"),
+});
