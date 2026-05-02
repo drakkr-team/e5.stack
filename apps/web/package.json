@@ -1,0 +1,50 @@
+{
+	"name": "@workspace/web",
+	"author": "elowanaud",
+	"type": "module",
+	"scripts": {
+		"build": "vite build",
+		"preview": "vite preview",
+		"dev": "concurrently --prefix none \"vite dev --port 3000\" \"pnpm:i18n:dev\"",
+		"typecheck": "tsc --noEmit",
+		"i18n:build": "node scripts/compile-locales.js",
+		"i18n:dev": "nodemon scripts/compile-locales.js --watch '**/locales/**/*.json' -e json -q"
+	},
+	"dependencies": {
+		"@tanstack/react-form": "1.29.1",
+		"@tanstack/react-query": "5.100.8",
+		"@tanstack/react-router": "1.169.1",
+		"@tanstack/react-router-ssr-query": "1.166.12",
+		"@tanstack/react-start": "1.167.59",
+		"@tanstack/react-table": "8.21.3",
+		"@tanstack/router-plugin": "1.167.32",
+		"@tuyau/core": "1.2.2",
+		"@tuyau/react-query": "^1.1.0",
+		"@tuyau/superjson": "1.0.0",
+		"@workspace/api": "workspace:*",
+		"i18next": "^26.0.8",
+		"react": "19.2.5",
+		"react-dom": "19.2.5",
+		"react-i18next": "^17.0.6",
+		"zod": "4.4.2"
+	},
+	"devDependencies": {
+		"@rolldown/plugin-babel": "0.2.3",
+		"@tailwindcss/vite": "4.2.4",
+		"@tanstack/devtools-vite": "0.6.0",
+		"@tanstack/react-devtools": "0.10.2",
+		"@tanstack/react-form-devtools": "0.2.22",
+		"@tanstack/react-query-devtools": "5.100.8",
+		"@tanstack/react-router-devtools": "1.166.13",
+		"@types/node": "24",
+		"@types/react": "19.2.14",
+		"@types/react-dom": "19.2.3",
+		"@vitejs/plugin-react": "6.0.1",
+		"concurrently": "9.2.1",
+		"deepmerge-json": "1.5.0",
+		"nodemon": "3.1.14",
+		"tailwindcss": "4.2.4",
+		"typescript": "6.0.3",
+		"vite": "8.0.10"
+	}
+}

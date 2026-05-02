@@ -9,7 +9,6 @@ export default defineConfig({
 		factories: "src/infrastructure/database/factories",
 		seeders: "src/infrastructure/database/seeders",
 		models: "src/application/models",
-		transformers: "src/application/transformers",
 		commands: "commands",
 	},
 
@@ -33,7 +32,6 @@ export default defineConfig({
 		() => import("@adonisjs/cors/cors_provider"),
 		() => import("@adonisjs/session/session_provider"),
 		() => import("@adonisjs/auth/auth_provider"),
-		() => import("#infrastructure/providers/api_provider"),
 	],
 
 	preloads: [
@@ -85,9 +83,6 @@ export default defineConfig({
 				},
 				transformers: {
 					enabled: false,
-					source: "src/application/transformers",
-					importAlias: "#application/transformers",
-					glob: ["**/*.transformer.{ts,js}"],
 				},
 				manifest: {
 					enabled: true,

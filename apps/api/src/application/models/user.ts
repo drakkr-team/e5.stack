@@ -17,4 +17,16 @@ export default class User extends compose(UserSchema, authFinder) {
 	});
 
 	static updateSchema = this.createSchema.partial();
+
+	toJSON() {
+		return {
+			id: this.id,
+
+			name: this.name,
+			email: this.email,
+
+			createdAt: this.createdAt.toJSDate(),
+			updatedAt: this.updatedAt.toJSDate(),
+		};
+	}
 }
