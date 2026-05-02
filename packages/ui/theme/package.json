@@ -6,12 +6,13 @@
 		"./tokens": "./src/tokens.ts"
 	},
 	"scripts": {
-		"generate:tailwind": "node scripts/generate-tailwind.js",
 		"build": "pnpm generate:tailwind",
-		"dev": "node --watch scripts/generate-tailwind.js",
-		"typecheck": "tsc --noEmit"
+		"dev": "nodemon scripts/generate-tailwind.js --watch src/tokens.ts -e ts -q",
+		"typecheck": "tsc --noEmit",
+		"generate:tailwind": "node scripts/generate-tailwind.js"
 	},
 	"devDependencies": {
+		"nodemon": "3.1.14",
 		"typescript": "6.0.3"
 	}
 }

@@ -34,7 +34,8 @@
 		"**/routeTree.gen.ts": true,
 		"**/.adonisjs/**": true,
 		"**/database/schema.ts": true,
-		"**/i18n/build/**": true
+		"**/i18n/build/**": true,
+		"packages/ui/theme/src/tailwind.css": true
 	},
 
 	// i18n-ally Settings
