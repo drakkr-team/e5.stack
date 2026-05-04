@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Field } from "../components/field";
 import { Input } from "../components/input";
+import { PasswordInput } from "../components/password-input";
 
 const meta: Meta<typeof Field> = {
 	title: "Field",
@@ -51,6 +52,17 @@ export const TextField: Story = {
 			<Input />
 			<Field.Description>Visible on your profile</Field.Description>
 			<Field.Error>Name is required</Field.Error>
+		</Field>
+	),
+};
+
+export const PasswordField: Story = {
+	render: (args) => (
+		<Field className="grid gap-1" {...args}>
+			<Field.Label>Password</Field.Label>
+			<PasswordInput />
+			<Field.Description>Must be at least 8 characters</Field.Description>
+			<Field.Error>Password is too short</Field.Error>
 		</Field>
 	),
 };
