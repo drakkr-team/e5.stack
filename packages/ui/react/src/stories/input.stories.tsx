@@ -4,7 +4,6 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Input } from "../components/input";
 
 const meta: Meta<typeof Input> = {
-	component: Input,
 	title: "Input",
 	parameters: {
 		docs: {
@@ -13,6 +12,7 @@ const meta: Meta<typeof Input> = {
 			},
 		},
 	},
+	component: Input,
 	argTypes: {
 		defaultValue: {
 			description: "The initial value of the input.",

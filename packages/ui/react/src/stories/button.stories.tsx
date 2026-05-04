@@ -7,7 +7,6 @@ const BUTTON_VARIANTS: ButtonProps["variant"][] = ["default", "primary", "ghost"
 const BUTTON_SIZES: ButtonProps["size"][] = ["md", "icon-sm", "icon-md"];
 
 const meta: Meta<typeof Button> = {
-	component: Button,
 	title: "Button",
 	parameters: {
 		docs: {
@@ -16,6 +15,7 @@ const meta: Meta<typeof Button> = {
 			},
 		},
 	},
+	component: Button,
 	argTypes: {
 		type: {
 			description: "The HTML button type attribute.",

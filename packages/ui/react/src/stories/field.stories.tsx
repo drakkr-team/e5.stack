@@ -1,0 +1,56 @@
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { Field } from "../components/field";
+import { Input } from "../components/input";
+
+const meta: Meta<typeof Field> = {
+	title: "Field",
+	parameters: {
+		docs: {
+			description: {
+				component: "https://base-ui.com/react/components/field",
+			},
+		},
+	},
+	component: Field,
+	subcomponents: {
+		Label: Field.Label,
+		Description: Field.Description,
+		Error: Field.Error,
+	},
+	argTypes: {
+		disabled: {
+			description: "Whether the field should ignore user interaction.",
+			control: "boolean",
+			type: "boolean",
+		},
+		invalid: {
+			description: "Whether the field is invalid.",
+			control: "boolean",
+			type: "boolean",
+		},
+		render: {
+			description:
+				"Allows you to replace the component’s HTML element with a different tag, or compose it with another component.",
+			control: false,
+			table: {
+				type: {
+					summary: "ReactElement",
+				},
+			},
+		},
+	},
+};
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const TextField: Story = {
+	render: (args) => (
+		<Field className="grid gap-1" {...args}>
+			<Field.Label>Name</Field.Label>
+			<Input />
+			<Field.Description>Visible on your profile</Field.Description>
+			<Field.Error>Name is required</Field.Error>
+		</Field>
+	),
+};
