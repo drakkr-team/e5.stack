@@ -1,7 +1,6 @@
-import { PlusSignIcon } from "@hugeicons/core-free-icons";
-import { HugeiconsIcon } from "@hugeicons/react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Button, type ButtonProps } from "@workspace/ui-react/components/button";
+import { PlusIcon } from "../../icons";
+import { Button, type ButtonProps } from "./index";
 
 const BUTTON_VARIANTS: ButtonProps["variant"][] = ["default", "primary", "ghost", "destructive"];
 const BUTTON_SIZES: ButtonProps["size"][] = ["md", "icon-sm", "icon-md"];
@@ -36,10 +35,10 @@ const meta: Meta<typeof Button> = {
 			options: ["Text", "Icon", "Text + Icon"],
 			mapping: {
 				Text: "Button",
-				Icon: <HugeiconsIcon icon={PlusSignIcon} />,
+				Icon: <PlusIcon />,
 				"Text + Icon": (
 					<>
-						<HugeiconsIcon icon={PlusSignIcon} />
+						<PlusIcon />
 						Button
 					</>
 				),

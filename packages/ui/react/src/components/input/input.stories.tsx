@@ -1,11 +1,17 @@
-import { Search01Icon } from "@hugeicons/core-free-icons";
-import { HugeiconsIcon } from "@hugeicons/react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { PasswordInput } from "../components/password-input";
+import { MagnifyingGlassCircleIcon } from "../../icons";
+import { Input } from "./index";
 
-const meta: Meta<typeof PasswordInput> = {
-	title: "Password Input",
-	component: PasswordInput,
+const meta: Meta<typeof Input> = {
+	title: "Input",
+	parameters: {
+		docs: {
+			description: {
+				component: "https://base-ui.com/react/components/input",
+			},
+		},
+	},
+	component: Input,
 	argTypes: {
 		defaultValue: {
 			description: "The initial value of the input.",
@@ -16,16 +22,6 @@ const meta: Meta<typeof PasswordInput> = {
 			description: "The value of the input.",
 			control: "text",
 			type: "string",
-		},
-		defaultVisible: {
-			description: "Whether the password is visible by default.",
-			control: "boolean",
-			type: "boolean",
-		},
-		visible: {
-			description: "Whether the password is visible.",
-			control: "boolean",
-			type: "boolean",
 		},
 		placeholder: {
 			description: "The placeholder text to display when the input is empty.",
@@ -42,7 +38,20 @@ const meta: Meta<typeof PasswordInput> = {
 			control: "select",
 			options: ["Search"],
 			mapping: {
-				Search: <HugeiconsIcon icon={Search01Icon} className="mx-1 size-4 text-neutral-11" />,
+				Search: <MagnifyingGlassCircleIcon className="mx-1 size-4 text-neutral-11" />,
+			},
+			table: {
+				type: {
+					summary: "ReactNode",
+				},
+			},
+		},
+		rightSlot: {
+			description: "The right slot of the input.",
+			control: "select",
+			options: ["Search"],
+			mapping: {
+				Search: <MagnifyingGlassCircleIcon className="mx-1 size-4 text-neutral-11" />,
 			},
 			table: {
 				type: {
@@ -62,14 +71,6 @@ const meta: Meta<typeof PasswordInput> = {
 		},
 		onValueChange: {
 			description: "The callback function called when the value changes.",
-			table: {
-				type: {
-					summary: "function",
-				},
-			},
-		},
-		onVisibilityChange: {
-			description: "The callback function called when the password visibility changes.",
 			table: {
 				type: {
 					summary: "function",

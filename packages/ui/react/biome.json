@@ -13,7 +13,7 @@
 					"level": "warn",
 					"fix": "safe",
 					"options": {
-						"functions": ["cn", "cva", "classNames", "clsx"]
+						"functions": ["tv"]
 					}
 				}
 			}

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Avatar, type AvatarProps } from "../components/avatar";
+import { Avatar, type AvatarProps } from "./index";
 
 const AVATAR_SIZES: AvatarProps["size"][] = ["sm", "md", "lg"];
 

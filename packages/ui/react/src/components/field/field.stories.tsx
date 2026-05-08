@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Field } from "../components/field";
-import { Input } from "../components/input";
-import { PasswordInput } from "../components/password-input";
+import { Input } from "../input";
+import { PasswordInput } from "../password-input";
+import { Field } from "./index";
 
 const meta: Meta<typeof Field> = {
 	title: "Field",

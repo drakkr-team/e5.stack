@@ -1,17 +1,16 @@
 import { Toggle as TogglePrimitive } from "@base-ui/react/toggle";
-import { ViewIcon, ViewOffSlashIcon } from "@hugeicons/core-free-icons";
-import { HugeiconsIcon } from "@hugeicons/react";
-import { Button } from "@workspace/ui-react/components/button";
-import { Input, type InputProps } from "@workspace/ui-react/components/input";
 import { useState } from "react";
+import { EyeIcon, EyeSlashIcon } from "../../icons";
+import { Button } from "../button";
+import { Input, type InputProps } from "../input";
 
-type PasswordInputProps = Omit<InputProps, "type" | "rightSlot"> & {
+export type PasswordInputRootProps = Omit<InputProps, "type" | "rightSlot"> & {
 	defaultVisible?: boolean;
 	visible?: boolean;
 	onVisibilityChange?: (visible: boolean, event: TogglePrimitive.ChangeEventDetails) => void;
 };
 
-function PasswordInput(props: PasswordInputProps) {
+export function PasswordInputRoot(props: PasswordInputRootProps) {
 	const { disabled, defaultVisible, visible, onVisibilityChange, ...rest } = props;
 
 	const isControlled = visible !== undefined;
@@ -37,14 +36,14 @@ function PasswordInput(props: PasswordInputProps) {
 				if (state.pressed) {
 					return (
 						<Button variant="ghost" size="icon-sm" {...props}>
-							<HugeiconsIcon icon={ViewIcon} />
+							<EyeIcon />
 						</Button>
 					);
 				}
 
 				return (
 					<Button variant="ghost" size="icon-sm" {...props}>
-						<HugeiconsIcon icon={ViewOffSlashIcon} />
+						<EyeSlashIcon />
 					</Button>
 				);
 			}}
@@ -60,6 +59,3 @@ function PasswordInput(props: PasswordInputProps) {
 		/>
 	);
 }
-
-export type { PasswordInputProps };
-export { PasswordInput };
