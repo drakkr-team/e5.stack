@@ -4,7 +4,7 @@ import { TanstackDevtoolsProvider } from "#/providers/tanstack-devtools";
 
 export function Providers({ children }: PropsWithChildren) {
 	return (
-		<ThemeProvider>
+		<ThemeProvider disableTransitionOnChange>
 			{children}
 			<TanstackDevtoolsProvider />
 		</ThemeProvider>

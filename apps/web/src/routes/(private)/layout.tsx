@@ -1,4 +1,5 @@
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
+import { Sidebar } from "#/components/app/sidebar";
 import { isAuthenticated } from "#/utils/auth";
 
 export const Route = createFileRoute("/(private)")({
@@ -16,5 +17,10 @@ export const Route = createFileRoute("/(private)")({
 });
 
 function Layout() {
-	return <Outlet />;
+	return (
+		<div className="ml-72 p-4">
+			<Sidebar />
+			<Outlet />
+		</div>
+	);
 }

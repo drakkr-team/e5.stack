@@ -20,5 +20,13 @@
 			"E_GUEST_ONLY": "Vous êtes déjà connecté. Veuillez vous déconnecter avant de vous connecter avec un compte.",
 			"E_UNEXPECTED": "Une erreur inattendue est survenue. Veuillez réessayer."
 		}
+	},
+
+	"features.user_management.authentication.hooks.use-logout-mutation": {
+		"error": {
+			"E_NETWORK": "Une erreur réseau est survenue. Veuillez réessayer.",
+			"E_UNAUTHENTICATED": "Vous n'êtes pas connecté. Veuillez vous connecter pour continuer.",
+			"E_UNEXPECTED": "Une erreur inattendue est survenue. Veuillez réessayer."
+		}
 	}
 }

@@ -1,0 +1,13 @@
+{
+	"components.app.sidebar.user-menu": {
+		"action": {
+			"theme": {
+				"label": "Thème",
+				"light": "Clair",
+				"dark": "Sombre",
+				"system": "Système"
+			},
+			"logout": "Se déconnecter"
+		}
+	}
+}
