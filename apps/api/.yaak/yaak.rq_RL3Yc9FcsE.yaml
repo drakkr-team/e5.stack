@@ -1,0 +1,18 @@
+type: http_request
+model: http_request
+id: rq_RL3Yc9FcsE
+createdAt: 2026-05-18T13:54:30.358620
+updatedAt: 2026-05-18T13:54:41.782412
+workspaceId: wk_bpdV78RkSs
+folderId: fl_Nx4w5zFUM4
+authentication: {}
+authenticationType: null
+body: {}
+bodyType: null
+description: ''
+headers: []
+method: DELETE
+name: Delete
+sortPriority: -1185152311070.6665
+url: ${[ BASE_URL ]}/profile
+urlParameters: []

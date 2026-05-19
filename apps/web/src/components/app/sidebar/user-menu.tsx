@@ -1,7 +1,6 @@
-import { useQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { Avatar } from "@workspace/ui-react/components/avatar";
 import { Menu } from "@workspace/ui-react/components/menu";
-import { Skeleton } from "@workspace/ui-react/components/skeleton";
 import { Spinner } from "@workspace/ui-react/components/spinner";
 import {
 	ChevronsUpDownIcon,
@@ -19,7 +18,7 @@ import { api } from "#/libs/tuyau";
 export function SidebarUserMenu() {
 	const { t } = useTranslation("components.app.sidebar.user-menu");
 
-	const { data: currentUser, isLoading: isLoadingUser } = useQuery(api.profile.view.queryOptions());
+	const { data: currentUser } = useSuspenseQuery(api.profile.view.queryOptions());
 	const { setTheme, theme } = useTheme();
 
 	const { mutate: logout, isPending: isLoggingOut } = useLogoutMutation();
@@ -27,22 +26,13 @@ export function SidebarUserMenu() {
 	return (
 		<Menu>
 			<Menu.Trigger className="grid w-full grid-cols-[auto_1fr_auto] items-center gap-3 rounded-lg p-2 outline-none ring-neutral-7 transition hover:bg-neutral-3 focus-visible:ring-3 data-popup-open:bg-neutral-3">
-				<Avatar size="lg" className={isLoadingUser ? "animate-pulse" : ""}>
-					<Avatar.Fallback>{currentUser?.name?.slice(0, 2).toUpperCase()}</Avatar.Fallback>
+				<Avatar size="lg">
+					<Avatar.Fallback>{currentUser.name.slice(0, 2).toUpperCase()}</Avatar.Fallback>
 				</Avatar>
 
 				<div className="grid text-start">
-					{isLoadingUser ? (
-						<>
-							<Skeleton className="mb-1 h-3.5 w-24 rounded-lg" />
-							<Skeleton className="h-3 w-40 rounded-lg" />
-						</>
-					) : (
-						<>
-							<p className="truncate text-neutral-12 text-sm">{currentUser?.name}</p>
-							<p className="truncate text-neutral-11 text-xs">{currentUser?.email}</p>
-						</>
-					)}
+					<p className="truncate text-neutral-12 text-sm">{currentUser.name}</p>
+					<p className="truncate text-neutral-11 text-xs">{currentUser.email}</p>
 				</div>
 
 				<ChevronsUpDownIcon className="size-4 text-neutral-11" />

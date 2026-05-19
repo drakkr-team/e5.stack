@@ -1,8 +1,8 @@
 type: http_request
 model: http_request
-id: rq_seFFmgzViK
-createdAt: 2026-05-16T05:12:50.525575
-updatedAt: 2026-05-18T13:32:32.085802
+id: rq_aH4UZyELLP
+createdAt: 2026-05-18T13:32:37.721347
+updatedAt: 2026-05-18T13:46:16.337372
 workspaceId: wk_bpdV78RkSs
 folderId: fl_e65UGoDWan
 authentication: {}
@@ -10,15 +10,15 @@ authenticationType: null
 body:
   form:
   - enabled: true
-    id: 3SKEVp4VCh
-    name: token
-    value: dsadasd
+    id: RKjrsrJ7zN
+    name: currentPassword
+    value: ${[ PASSWORD_CREDENTIAL ]}
   - enabled: true
-    id: 0S6hstGYMZ
+    id: suN3h2ze3K
     name: newPassword
-    value: ''
+    value: ${[ PASSWORD_CREDENTIAL ]}
   - enabled: true
-    id: fcFpPTeDEg
+    id: PyfwgGuIRD
     name: ''
     value: ''
 bodyType: multipart/form-data
@@ -27,9 +27,9 @@ headers:
 - enabled: true
   name: Content-Type
   value: multipart/form-data
-  id: 2IjFHcGDdb
-method: POST
-name: Reset
+  id: BMaMQWEH9V
+method: PUT
+name: Update
 sortPriority: -1778907639142.999
-url: ${[ BASE_URL ]}/auth/reset-password
+url: ${[ BASE_URL ]}/profile/password
 urlParameters: []

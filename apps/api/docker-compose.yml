@@ -1,6 +1,6 @@
 name: "e5.stack/api"
 services:
-  postgresql:
+  database:
     image: postgres:15-alpine
     environment:
       - POSTGRES_USER=${DB_USER}
@@ -9,7 +9,13 @@ services:
     ports:
         - ${DB_PORT}:5432
     volumes:
-      - postgresql:/var/lib/postgresql/data
+      - database:/var/lib/postgresql/data
+
+  mailtrap:
+    image: rnwood/smtp4dev:latest
+    ports:
+      - "5001:80" # Web UI
+      - ${SMTP_PORT}:25 # SMTP
 
 volumes:
-  postgresql:
+  database:

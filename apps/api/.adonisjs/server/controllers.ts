@@ -10,12 +10,15 @@ export const controllers = {
         LoginWithCredentials: () => import('#src/features/user_management/authentication/controllers/login_with_credentials.controller'),
         Logout: () => import('#src/features/user_management/authentication/controllers/logout.controller'),
       },
-      profile: {
-        View: () => import('#src/features/user_management/profile/controllers/view.controller'),
-      },
       password: {
-        ForgotPassword: () => import('#src/features/user_management/password/controllers/forgot_password.controller'),
-        ResetPassword: () => import('#src/features/user_management/password/controllers/reset_password.controller'),
+        Forgot: () => import('#src/features/user_management/password/controllers/forgot.controller'),
+        Reset: () => import('#src/features/user_management/password/controllers/reset.controller'),
+        Update: () => import('#src/features/user_management/password/controllers/update.controller'),
+      },
+      profile: {
+        Delete: () => import('#src/features/user_management/profile/controllers/delete.controller'),
+        Update: () => import('#src/features/user_management/profile/controllers/update.controller'),
+        View: () => import('#src/features/user_management/profile/controllers/view.controller'),
       },
     },
   },

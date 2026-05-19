@@ -4,12 +4,19 @@ import { middleware } from "#start/kernel";
 
 router
 	.group(() => {
-		router
-			.post("/forgot-password", [controllers.features.userManagement.password.ForgotPassword])
-			.use(middleware.guest());
-		router
-			.post("/reset-password", [controllers.features.userManagement.password.ResetPassword])
-			.use(middleware.guest());
+		router.post("/forgot-password", [controllers.features.userManagement.password.Forgot]);
+		router.post("/reset-password", [controllers.features.userManagement.password.Reset]);
 	})
+	.use(middleware.guest())
 	.prefix("/auth")
 	.as("auth");
+
+router
+	.group(() => {
+		router
+			.put("/password", [controllers.features.userManagement.password.Update])
+			.as("updatePassword");
+	})
+	.use(middleware.auth({ guards: ["web"] }))
+	.prefix("/profile")
+	.as("profile");

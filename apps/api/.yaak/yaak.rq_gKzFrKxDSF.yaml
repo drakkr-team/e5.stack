@@ -1,20 +1,20 @@
 type: http_request
 model: http_request
-id: rq_FLTaYMnNBC
-createdAt: 2026-05-16T05:00:39.144296
-updatedAt: 2026-05-18T13:32:28.628132
+id: rq_gKzFrKxDSF
+createdAt: 2026-05-18T13:46:35.574536
+updatedAt: 2026-05-18T13:49:31.804688
 workspaceId: wk_bpdV78RkSs
-folderId: fl_e65UGoDWan
+folderId: fl_Nx4w5zFUM4
 authentication: {}
 authenticationType: null
 body:
   form:
   - enabled: true
-    id: 0S6hstGYMZ
-    name: email
-    value: ${[ UID_CREDENTIAL ]}
+    id: EyP3EfBAE7
+    name: name
+    value: ${[ faker.person.fullName() ]}
   - enabled: true
-    id: jhZmzyvXdr
+    id: AMiIHx30K5
     name: ''
     value: ''
 bodyType: multipart/form-data
@@ -23,9 +23,9 @@ headers:
 - enabled: true
   name: Content-Type
   value: multipart/form-data
-  id: 2IjFHcGDdb
-method: POST
-name: Forgot
-sortPriority: -1778907639143.0
-url: ${[ BASE_URL ]}/auth/forgot-password
+  id: 4pBw7ZHkTj
+method: PUT
+name: Update
+sortPriority: -1185152311070.6665
+url: ${[ BASE_URL ]}/profile
 urlParameters: []

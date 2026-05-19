@@ -28,4 +28,15 @@ export default await Env.create(new URL("../", import.meta.url), {
 	DB_USER: Env.schema.string(),
 	DB_PASSWORD: Env.schema.string.optional(),
 	DB_DATABASE: Env.schema.string(),
+
+	// Mail Config
+	MAIL_MAILER: Env.schema.enum(["smtp"] as const),
+	MAIL_FROM_NAME: Env.schema.string(),
+	MAIL_FROM_ADDRESS: Env.schema.string(),
+
+	// SMTP Config
+	SMTP_HOST: Env.schema.string.optionalWhen(process.env.MAILER_DRIVER !== "local", {
+		format: "host",
+	}),
+	SMTP_PORT: Env.schema.number.optionalWhen(process.env.MAILER_DRIVER !== "local"),
 });

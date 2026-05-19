@@ -5,6 +5,8 @@ import { middleware } from "#start/kernel";
 router
 	.group(() => {
 		router.get("/", [controllers.features.userManagement.profile.View]);
+		router.put("/", [controllers.features.userManagement.profile.Update]);
+		router.delete("/", [controllers.features.userManagement.profile.Delete]);
 	})
 	.use(middleware.auth({ guards: ["web"] }))
 	.prefix("/profile")

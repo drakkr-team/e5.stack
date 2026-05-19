@@ -53,7 +53,7 @@ type GenerateDTOs = {
 	params: {
 		user: User;
 		type: UserTokenType;
-		expiresAt?: DateTime;
+		expiresAt: DateTime;
 	};
 };
 
