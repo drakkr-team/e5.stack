@@ -25,7 +25,7 @@ export function MenuContent(props: MenuContentProps) {
 				<MenuPrimitive.Popup
 					className={cn(
 						// Default
-						"origin-(--transform-origin) rounded-lg border border-neutral-6 bg-neutral-1 py-1 shadow shadow-neutral-6 outline-none transition",
+						"origin-(--transform-origin) rounded-lg border border-neutral-6 bg-neutral-1 py-1 shadow shadow-neutral-5 outline-none transition",
 						// Starting Animation
 						"data-starting-style:data-[side=inline-end]:-translate-x-1 data-starting-style:data-[side=inline-start]:translate-x-1 data-starting-style:data-[side=left]:translate-x-1 data-starting-style:data-[side=right]:-translate-x-1 data-starting-style:data-[side=bottom]:-translate-y-1 data-starting-style:data-[side=top]:translate-y-1 data-starting-style:scale-95 data-starting-style:opacity-0",
 						// Ending Animation

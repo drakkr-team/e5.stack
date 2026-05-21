@@ -29,11 +29,26 @@ export function useLoginMutation(
 			},
 			onError: (error) => {
 				toastifyTuyauError(error, {
-					E_NETWORK: t("error.E_NETWORK"),
-					E_VALIDATION: t("error.E_INVALID_CREDENTIALS"),
-					E_GUEST_ONLY: t("error.E_GUEST_ONLY"),
-					E_INVALID_CREDENTIALS: t("error.E_INVALID_CREDENTIALS"),
-					E_UNEXPECTED: t("error.E_UNEXPECTED"),
+					E_NETWORK: [
+						t("error.E_NETWORK.title"),
+						{ description: t("error.E_NETWORK.description") },
+					],
+					E_VALIDATION: [
+						t("error.E_INVALID_CREDENTIALS.title"),
+						{ description: t("error.E_INVALID_CREDENTIALS.description") },
+					],
+					E_GUEST_ONLY: [
+						t("error.E_GUEST_ONLY.title"),
+						{ description: t("error.E_GUEST_ONLY.description") },
+					],
+					E_INVALID_CREDENTIALS: [
+						t("error.E_INVALID_CREDENTIALS.title"),
+						{ description: t("error.E_INVALID_CREDENTIALS.description") },
+					],
+					E_UNEXPECTED: [
+						t("error.E_UNEXPECTED.title"),
+						{ description: t("error.E_UNEXPECTED.description") },
+					],
 				});
 			},
 		}),

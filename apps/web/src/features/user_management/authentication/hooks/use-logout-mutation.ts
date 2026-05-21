@@ -20,10 +20,22 @@ export function useLogoutMutation() {
 			},
 			onError: (error) => {
 				toastifyTuyauError(error, {
-					E_NETWORK: t("error.E_NETWORK"),
-					E_UNEXPECTED: t("error.E_UNEXPECTED"),
-					E_VALIDATION: t("error.E_UNEXPECTED"),
-					E_UNAUTHENTICATED: t("error.E_UNAUTHENTICATED"),
+					E_NETWORK: [
+						t("error.E_NETWORK.title"),
+						{ description: t("error.E_NETWORK.description") },
+					],
+					E_UNEXPECTED: [
+						t("error.E_UNEXPECTED.title"),
+						{ description: t("error.E_UNEXPECTED.description") },
+					],
+					E_VALIDATION: [
+						t("error.E_UNEXPECTED.title"),
+						{ description: t("error.E_UNEXPECTED.description") },
+					],
+					E_UNAUTHENTICATED: [
+						t("error.E_UNAUTHENTICATED.title"),
+						{ description: t("error.E_UNAUTHENTICATED.description") },
+					],
 				});
 			},
 		}),

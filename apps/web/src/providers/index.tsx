@@ -1,3 +1,4 @@
+import { ToastProvider } from "@workspace/ui-react/components/toast";
 import { ThemeProvider } from "next-themes";
 import type { PropsWithChildren } from "react";
 import { TanstackDevtoolsProvider } from "#/providers/tanstack-devtools";
@@ -7,6 +8,7 @@ export function Providers({ children }: PropsWithChildren) {
 		<ThemeProvider disableTransitionOnChange>
 			{children}
 			<TanstackDevtoolsProvider />
+			<ToastProvider />
 		</ThemeProvider>
 	);
 }

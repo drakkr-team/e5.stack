@@ -1,21 +1,22 @@
 import type { TuyauError } from "@tuyau/core/client";
+import { type ExternalToast, toast } from "@workspace/ui-react/components/toast";
 
 export function toastifyTuyauError(
 	error: TuyauError,
 	errorMessages: {
-		E_NETWORK: string;
-		E_UNEXPECTED: string;
-		E_VALIDATION?: string;
-	} & Record<string, string>,
+		E_NETWORK: [title: string, data?: ExternalToast];
+		E_UNEXPECTED: [title: string, data?: ExternalToast];
+		E_VALIDATION?: [title: string, data?: ExternalToast];
+	} & Record<string, [title: string, data?: ExternalToast]>,
 ) {
 	const { E_NETWORK, E_UNEXPECTED, E_VALIDATION, ...customErrors } = errorMessages;
 
 	if (error.kind === "network") {
-		return console.error(E_NETWORK); // Convert this to a toast notification in the future
+		return toast.error(...E_NETWORK);
 	}
 
 	if (error.isValidationError()) {
-		return console.error(E_VALIDATION); // Convert this to a toast notification in the future
+		return toast.error(...(E_VALIDATION ?? E_UNEXPECTED));
 	}
 
 	if (customErrors) {
@@ -25,9 +26,9 @@ export function toastifyTuyauError(
 
 		if (customError) {
 			const [, message] = customError;
-			return console.error(message); // Convert this to a toast notification in the future
+			return toast.error(...message);
 		}
 	}
 
-	return console.error(E_UNEXPECTED); // Convert this to a toast notification in the future
+	return toast.error(...E_UNEXPECTED);
 }
