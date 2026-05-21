@@ -21,3 +21,6 @@ tmp/
 
 # Misc
 .DS_Store
+
+# Oh My OpenAgent
+.omo
