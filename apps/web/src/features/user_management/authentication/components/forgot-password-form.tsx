@@ -16,6 +16,7 @@ export function ForgotPasswordForm() {
 				e.stopPropagation();
 				form.handleSubmit();
 			}}
+			noValidate
 		>
 			<form.AppField name="email">
 				{(field) => (
@@ -24,7 +25,7 @@ export function ForgotPasswordForm() {
 			</form.AppField>
 
 			<form.AppForm>
-				<form.SubmitButton variant="primary">{t("action.send_reset_email")}</form.SubmitButton>
+				<form.SubmitButton variant="primary">{t("action.sendResetEmail")}</form.SubmitButton>
 			</form.AppForm>
 		</form>
 	);

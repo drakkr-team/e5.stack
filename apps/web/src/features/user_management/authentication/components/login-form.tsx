@@ -41,7 +41,7 @@ export function LoginForm(props: LoginFormProps) {
 							<div className="flex items-end justify-between">
 								<Field.Label htmlFor={field.name}>{t("field.password.label")}</Field.Label>
 								<Link render={<RouterLink to="/forgot-password" />} className="text-xs">
-									{t("action.forgot_password")}
+									{t("action.forgotPassword")}
 								</Link>
 							</div>
 							<PasswordInput

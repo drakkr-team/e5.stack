@@ -6,6 +6,8 @@ export async function isAuthenticated(queryClient: QueryClient) {
 		const currentUser = await queryClient.ensureQueryData(api.profile.view.queryOptions());
 		return !!currentUser;
 	} catch (_error) {
+		// @ts-expect-error: Set null to prevent refetching the user profile until the next authentication attempt
+		queryClient.setQueryData(api.profile.view.queryKey(), null);
 		return false;
 	}
 }
