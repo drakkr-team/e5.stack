@@ -1,10 +1,9 @@
 import { inject } from "@adonisjs/core";
-import mail from "@adonisjs/mail/services/main";
 import { DateTime } from "luxon";
 import InvalidCredentialsException from "#features/user_management/authentication/exceptions/invalid_credentials.exception";
 import InvalidTokenException from "#features/user_management/password/exceptions/invalid_token.exception";
-import PasswordChangedNotificationMail from "#features/user_management/password/mails/password_changed_notifiction.mail";
-import ResetPasswordInstructionMail from "#features/user_management/password/mails/reset_password_instruction.mail";
+import SendPasswordChangedNotification from "#features/user_management/password/jobs/send_password_changed_notification.job";
+import SendResetPasswordInstruction from "#features/user_management/password/jobs/send_reset_password_instruction.job";
 import User from "#models/user";
 import { UserTokenType } from "#models/user_token";
 import UserTokenService from "#services/user_token.service";
@@ -22,12 +21,10 @@ export default class PasswordService {
 		}
 
 		await user.merge({ password: newPassword }).save();
-		await mail.send(
-			new PasswordChangedNotificationMail({
-				user,
-				loginUrl: new URL("/login", env.get("FRONTEND_URL")),
-			}),
-		);
+		await SendPasswordChangedNotification.dispatch({
+			user,
+			loginUrl: new URL("/login", env.get("FRONTEND_URL")),
+		});
 	}
 
 	async forgot(email: string) {
@@ -42,7 +39,7 @@ export default class PasswordService {
 		const resetPasswordUrl = new URL("/reset-password", env.get("FRONTEND_URL"));
 		resetPasswordUrl.searchParams.set("token", token);
 
-		await mail.send(new ResetPasswordInstructionMail({ user, resetPasswordUrl }));
+		await SendResetPasswordInstruction.dispatch({ user, resetPasswordUrl });
 	}
 
 	async reset(params: ResetPasswordDTO["params"]) {
@@ -61,12 +58,10 @@ export default class PasswordService {
 			type: UserTokenType.RESET_PASSWORD,
 		});
 
-		await mail.send(
-			new PasswordChangedNotificationMail({
-				user,
-				loginUrl: new URL("/login", env.get("FRONTEND_URL")),
-			}),
-		);
+		await SendPasswordChangedNotification.dispatch({
+			user,
+			loginUrl: new URL("/login", env.get("FRONTEND_URL")),
+		});
 	}
 }
 

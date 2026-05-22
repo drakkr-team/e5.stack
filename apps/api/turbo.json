@@ -9,9 +9,13 @@
 		"dev": {
 			"cache": false,
 			"persistent": true,
-			"with": ["docker-compose"]
+			"with": ["docker-compose", "worker"]
 		},
 		"docker-compose": {
+			"cache": false,
+			"persistent": true
+		},
+		"worker": {
 			"cache": false,
 			"persistent": true
 		}

@@ -1,6 +1,5 @@
 {
-	"include": ["**/*.ts", "**/*.tsx", "../api/**/*.ts", "../api/.adonisjs/**/*.ts"],
-	"exclude": ["node_modules", "../api/build", "../api/node_modules"],
+	"include": ["**/*.ts", "**/*.tsx"],
 	"compilerOptions": {
 		"target": "ES2022",
 		"jsx": "react-jsx",

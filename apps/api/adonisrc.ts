@@ -22,6 +22,7 @@ export default defineConfig({
 		() => import("@adonisjs/lucid/commands"),
 		() => import("@adonisjs/session/commands"),
 		() => import("@adonisjs/mail/commands"),
+		() => import("@adonisjs/queue/commands"),
 	],
 
 	providers: [
@@ -40,6 +41,7 @@ export default defineConfig({
 		() => import("@adonisjs/mail/mail_provider"),
 		() => import("@adonisjs/redis/redis_provider"),
 		() => import("@adonisjs/limiter/limiter_provider"),
+		() => import("@adonisjs/queue/queue_provider"),
 	],
 
 	preloads: [
