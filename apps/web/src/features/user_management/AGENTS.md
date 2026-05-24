@@ -2,13 +2,15 @@
 
 ## OVERVIEW
 
-Frontend user-management domain. Current concrete features: authentication (login/logout) and password recovery (forgot/reset).
+Frontend user-management domain. Current concrete features: authentication (login/logout), password recovery (forgot/reset/update), and profile management (update/delete).
 
 ## WHERE TO LOOK
 
 | Task | Location | Notes |
 |------|----------|-------|
 | Login form and mutations | `authentication/` | Components, hooks, and translations. |
+| Password forms and mutations | `password/` | Forgot/reset (guest) and update (auth) forms. |
+| Profile forms and mutations | `profile/` | Update/delete forms, confirmation dialog. |
 | Route surfaces | `../../routes/(guest)/(auth)/*` | Route files render/auth-gate the feature. |
 | Auth shell UI | `../../components/app/sidebar/*` | Logout mutation consumed by sidebar menu. |
 | Auth helper | `../../utils/auth.ts` | Route guards call `isAuthenticated`. |

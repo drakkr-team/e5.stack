@@ -1,7 +1,7 @@
 # PROJECT KNOWLEDGE BASE
 
-**Generated:** 2026-05-22
-**Commit:** 63ae49d
+**Generated:** 2026-05-24
+**Commit:** 4e3042a
 **Branch:** main
 
 ## OVERVIEW
@@ -33,6 +33,8 @@ e5.stack/
 | Web routes | `apps/web/src/routes/**/{layout,page}.tsx`, `apps/web/src/router.tsx` | `routeTree.gen.ts` is generated. |
 | Web API client | `apps/web/src/libs/tuyau.ts`, `@workspace/api/registry` | Registry comes from the API build hooks. |
 | Web forms | `apps/web/src/libs/form.ts`, `apps/web/src/components/form/*` | TanStack Form components registered centrally. |
+| Web password forms | `apps/web/src/features/user_management/password/**` | Forgot/reset (guest) and update (auth) forms, hooks, mutations. |
+| Web profile | `apps/web/src/features/user_management/profile/**` | Update/delete forms, hooks, mutations, and confirmation dialog. |
 | Web translations | `apps/web/scripts/compile-locales.js`, `apps/web/src/**/locales/fr.json` | Build output is generated under `src/libs/i18n/build`. |
 | React UI components | `packages/ui/react/src/components/*` | Folder-per-component with story + barrel. |
 | Theme tokens | `packages/ui/theme/src/tokens.ts` | Source of truth for `tailwind.css`. |

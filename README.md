@@ -1,6 +1,8 @@
 <!-- prettier-ignore -->
 <div align="center">
 
+<img src="./apps/web/public/android-chrome-192x192.png" alt="e5.stack" align="center" width="64" />
+
 # e5.stack
 
 **A modern, hyper-optimized TypeScript monorepo.**
@@ -14,9 +16,11 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)](#)
 [![Turborepo](https://img.shields.io/badge/Turborepo-EF4444?style=flat-square&logo=turborepo&logoColor=white)](#)
 [![Biome](https://img.shields.io/badge/Biome-60A5FA?style=flat-square&logo=biome&logoColor=white)](#)
-[![CI Status](https://img.shields.io/badge/CI-Passing-success?style=flat-square&logo=githubactions&logoColor=white)](#)
+[![CI](https://img.shields.io/github/actions/workflow/status/eloitsme/e5.stack/ci.yml?style=flat-square&label=CI)](.github/workflows/ci.yml)
 
 *End-to-end type safety, domain-driven API architecture, and a beautifully modular UI.*
+
+[Overview](#overview) • [Features](#features) • [Getting Started](#getting-started) • [Commands](#commands) • [Architecture](#architecture)
 
 </div>
 
@@ -36,8 +40,6 @@
 - **Developer Experience:** Fast task orchestration with Turborepo, unified linting and formatting via Biome, and Docker Compose for local database services.
 
 ## Project Structure
-
-The repository is organized as a pnpm workspace managed by Turborepo:
 
 ```text
 e5.stack/
@@ -93,7 +95,7 @@ e5.stack/
 > [!NOTE]
 > The API relies on a Docker Compose sidecar task. Ensure the Docker daemon is running before executing `pnpm dev`.
 
-## Development Commands
+## Commands
 
 Run these from the root directory:
 
@@ -118,7 +120,7 @@ pnpm --filter @workspace/ui-react dev   # Start Storybook for UI development
 pnpm --filter @workspace/ui-theme generate:tailwind # Regenerate Tailwind tokens
 ```
 
-## Architecture Notes
+## Architecture
 
 <details>
 <summary><strong>Backend (AdonisJS)</strong></summary>
