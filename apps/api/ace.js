@@ -24,4 +24,6 @@ import "@poppinss/ts-exec";
 /**
  * Import ace console entrypoint
  */
+
+// biome-ignore lint/style/noRestrictedImports: 'bin/console.ts' is not a restricted import, it's the entrypoint for ace commands
 await import("./bin/console.js");

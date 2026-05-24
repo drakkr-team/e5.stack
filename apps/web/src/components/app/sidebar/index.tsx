@@ -1,5 +1,5 @@
 import { Sidebar as UiSidebar } from "@workspace/ui-react/components/sidebar";
-import { SidebarUserMenu } from "./user-menu";
+import { SidebarUserMenu } from "#/components/app/sidebar/user-menu";
 
 export function Sidebar() {
 	return (

@@ -1,6 +1,9 @@
 import { Card } from "@workspace/ui-react/components/card";
 import { useTranslation } from "react-i18next";
-import { type UseUpdatePasswordFormOptions, useUpdatePasswordForm } from "../hooks/use-update-form";
+import {
+	type UseUpdatePasswordFormOptions,
+	useUpdatePasswordForm,
+} from "#/features/user_management/password/hooks/use-update-form";
 
 type UpdatePasswordFormProps = UseUpdatePasswordFormOptions;
 

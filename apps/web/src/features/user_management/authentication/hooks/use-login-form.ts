@@ -1,19 +1,24 @@
+import { useLoginMutation } from "#/features/user_management/authentication/hooks/use-login-mutation";
 import { useAppForm } from "#/libs/form";
-import { useLoginMutation } from "./use-login-mutation";
 
-type UseLoginFormParams = never;
-
-type UseLoginFormOptions = {
+export type UseLoginFormOptions = {
 	redirectTo?: string;
+	defaultValues?: {
+		uid?: string;
+		password?: string;
+	};
 };
 
-export function useLoginForm(_params?: UseLoginFormParams, options?: UseLoginFormOptions) {
-	const { mutateAsync: login } = useLoginMutation(undefined, { redirectTo: options?.redirectTo });
+export function useLoginForm(options?: UseLoginFormOptions) {
+	const { redirectTo, defaultValues } = options ?? {};
+
+	const { mutateAsync: login } = useLoginMutation(undefined, { redirectTo });
 
 	return useAppForm({
 		defaultValues: {
 			uid: "",
 			password: "",
+			...defaultValues,
 		},
 		onSubmit: async ({ value }) => {
 			await login({

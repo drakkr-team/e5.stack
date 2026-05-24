@@ -6,7 +6,7 @@ import {
 import { Button } from "@workspace/ui-react/components/button";
 import { Spinner } from "@workspace/ui-react/components/spinner";
 import { useTranslation } from "react-i18next";
-import { useDeleteProfileMutation } from "../hooks/use-delete-mutation";
+import { useDeleteProfileMutation } from "#/features/user_management/profile/hooks/use-delete-mutation";
 
 type DeleteProfileConfirmationDialogProps = {
 	trigger: AlertDialogTriggerProps["render"];

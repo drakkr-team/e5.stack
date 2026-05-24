@@ -5,15 +5,13 @@ import { useTranslation } from "react-i18next";
 import { api } from "#/libs/tuyau";
 import { toastifyTuyauError } from "#/utils/tuyau";
 
-export function useForgotPasswordMutation() {
-	const { t } = useTranslation(
-		"features.user_management.authentication.hooks.use-forgot-password-mutation",
-	);
+export function useResetPasswordMutation() {
+	const { t } = useTranslation("features.user_management.password.hooks.use-reset-mutation");
 
 	const navigate = useNavigate();
 
 	return useMutation(
-		api.auth.password.forgot.mutationOptions({
+		api.auth.password.reset.mutationOptions({
 			onSuccess: () => {
 				toast.success(t("success.title"), {
 					description: t("success.description"),
@@ -29,6 +27,10 @@ export function useForgotPasswordMutation() {
 					E_VALIDATION: [
 						t("error.E_VALIDATION.title"),
 						{ description: t("error.E_VALIDATION.description") },
+					],
+					E_INVALID_TOKEN: [
+						t("error.E_INVALID_TOKEN.title"),
+						{ description: t("error.E_INVALID_TOKEN.description") },
 					],
 					E_GUEST_ONLY: [
 						t("error.E_GUEST_ONLY.title"),

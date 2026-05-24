@@ -5,6 +5,7 @@ export default class DeleteProfileController {
 		const user = auth.user!;
 
 		await user.delete();
+		await auth.use("web").logout();
 
 		return null;
 	}

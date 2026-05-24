@@ -1,6 +1,9 @@
 import { Card } from "@workspace/ui-react/components/card";
 import { useTranslation } from "react-i18next";
-import { type UseUpdateProfileFormOptions, useUpdateProfileForm } from "../hooks/use-update-form";
+import {
+	type UseUpdateProfileFormOptions,
+	useUpdateProfileForm,
+} from "#/features/user_management/profile/hooks/use-update-form";
 
 type UpdateProfileFormProps = UseUpdateProfileFormOptions;
 

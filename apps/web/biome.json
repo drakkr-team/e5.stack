@@ -26,6 +26,19 @@
 						"functions": ["cn", "tv"]
 					}
 				}
+			},
+			"style": {
+				"noRestrictedImports": {
+					"level": "error",
+					"options": {
+						"patterns": [
+							{
+								"group": ["./**", "../**"],
+								"message": "Use alias imports instead of relative imports."
+							}
+						]
+					}
+				}
 			}
 		}
 	},

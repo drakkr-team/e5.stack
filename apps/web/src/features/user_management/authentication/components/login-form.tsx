@@ -3,18 +3,19 @@ import { Field } from "@workspace/ui-react/components/field";
 import { Link } from "@workspace/ui-react/components/link";
 import { PasswordInput } from "@workspace/ui-react/components/password-input";
 import { useTranslation } from "react-i18next";
-import { useLoginForm } from "#/features/user_management/authentication/hooks/use-login-form";
+import {
+	type UseLoginFormOptions,
+	useLoginForm,
+} from "#/features/user_management/authentication/hooks/use-login-form";
 
-type LoginFormProps = {
-	redirectTo?: string;
-};
+type LoginFormProps = UseLoginFormOptions;
 
 export function LoginForm(props: LoginFormProps) {
-	const { redirectTo } = props;
+	const { redirectTo, defaultValues } = props;
 
 	const { t } = useTranslation("features.user_management.authentication.components.login-form");
 
-	const form = useLoginForm(undefined, { redirectTo });
+	const form = useLoginForm({ defaultValues, redirectTo });
 
 	return (
 		<form

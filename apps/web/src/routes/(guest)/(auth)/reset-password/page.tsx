@@ -3,7 +3,7 @@ import { toast } from "@workspace/ui-react/components/toast";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import z from "zod";
-import { ResetPasswordForm } from "#/features/user_management/authentication/components/reset-password-form";
+import { ResetPasswordForm } from "#/features/user_management/password/components/reset-form";
 
 const searchParamsSchema = z.object({
 	token: z.string().optional(),
