@@ -21,6 +21,8 @@ export default class UpdatePasswordController {
 			newPassword,
 		});
 
+		await auth.use("web").logout();
+
 		return null;
 	}
 

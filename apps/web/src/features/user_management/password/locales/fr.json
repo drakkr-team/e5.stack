@@ -1,0 +1,66 @@
+{
+	"features.user_management.password.components.update-form": {
+		"title": "Mot de passe",
+		"description": "Définir un nouveau mot de passe pour votre compte.",
+		"fields": {
+			"currentPassword": {
+				"label": "Mot de passe actuel"
+			},
+			"newPassword": {
+				"label": "Nouveau mot de passe"
+			},
+			"confirmNewPassword": {
+				"label": "Confirmer le nouveau mot de passe"
+			}
+		},
+		"action": {
+			"submit": "Changer le mot de passe"
+		}
+	},
+
+	"features.user_management.password.hooks.use-update-mutation": {
+		"success": {
+			"title": "Mot de passe mis à jour",
+			"description": "Votre mot de passe a été mis à jour avec succès. Veuillez vous reconnecter avec votre nouveau mot de passe."
+		},
+		"error": {
+			"E_NETWORK": {
+				"title": "Une erreur réseau est survenue.",
+				"description": "Veuillez vérifier votre connexion internet et réessayer."
+			},
+			"E_VALIDATION": {
+				"title": "Données invalides.",
+				"description": "Veuillez vérifier votre mot de passe et réessayer."
+			},
+			"E_INVALID_CREDENTIALS": {
+				"title": "Mot de passe actuel incorrect.",
+				"description": "Veuillez vérifier votre mot de passe actuel et réessayer."
+			},
+			"E_UNAUTHENTICATED": {
+				"title": "Vous n'êtes pas connecté.",
+				"description": "Veuillez vous connecter pour continuer."
+			},
+			"E_UNEXPECTED": {
+				"title": "Une erreur inattendue est survenue.",
+				"description": "Veuillez réessayer."
+			}
+		}
+	},
+
+	"features.user_management.password.hooks.use-update-form": {
+		"validation": {
+			"currentPassword": {
+				"required": "Veuillez entrer votre mot de passe actuel."
+			},
+			"newPassword": {
+				"required": "Veuillez entrer un nouveau mot de passe.",
+				"min": "Le nouveau mot de passe doit comporter au moins 8 caractères.",
+				"max": "Le nouveau mot de passe ne doit pas dépasser 32 caractères."
+			},
+			"confirmNewPassword": {
+				"required": "Veuillez confirmer votre nouveau mot de passe.",
+				"mismatch": "Les mots de passe ne correspondent pas."
+			}
+		}
+	}
+}
