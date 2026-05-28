@@ -22,6 +22,10 @@ export function ToastProvider(props: ToastProviderProps) {
 					title: "text-sm font-medium text-neutral-12",
 					description: "text-xs text-neutral-11",
 					icon: "relative size-5 flex items-center justify-center",
+					info: "bg-linear-to-br from-info-3 to-75% to-neutral-1",
+					success: "bg-linear-to-br from-success-3 to-75% to-neutral-1",
+					error: "bg-linear-to-br from-error-3 to-75% to-neutral-1",
+					warning: "bg-linear-to-br from-warning-3 to-75% to-neutral-1",
 				},
 			}}
 			{...props}
