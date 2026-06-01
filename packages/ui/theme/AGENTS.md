@@ -12,11 +12,13 @@ Theme token package where `src/tokens.ts` is the editable source of truth and `s
 | Token source | `src/tokens.ts` | Fonts plus color scales with light/dark values. |
 | CSS generator | `scripts/generate-tailwind.js` | Validates token shape and writes CSS. |
 | Generated CSS | `src/tailwind.css` | Checked in; do not edit manually. |
+| Watch mode | `package.json` | `dev` watches `src/tokens.ts` and regenerates CSS. |
 | Formatter scope | `biome.json` | Package-level Biome config. |
 
 ## CONVENTIONS
 
 - Add/edit theme values in `src/tokens.ts`, then regenerate CSS.
+- Use `pnpm --filter @workspace/ui-theme dev` while editing tokens for watch regeneration.
 - Color token shape is `{ [scale]: { [step]: { light, dark } } }`.
 - Fonts are string tokens under `fonts`.
 - Generated CSS defines `@theme inline`, resets `--color-*`, emits light `:root`, dark `[data-theme="dark"]`, and reduced-motion rules.

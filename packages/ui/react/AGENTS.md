@@ -2,13 +2,13 @@
 
 ## OVERVIEW
 
-React 19 UI component package wrapping Base UI primitives with Tailwind 4 tokens, tailwind-variants, lucide icons, and Storybook docs.
+React 19 UI component package with Base UI wrappers, composite components, Tailwind 4 tokens, tailwind-variants, lucide icons, sonner toasts, and Storybook docs.
 
 ## WHERE TO LOOK
 
 | Task | Location | Notes |
 |------|----------|-------|
-| Public exports | `package.json` | Exposes `components/*`, `icons`, `providers/*`, `hooks/*`. |
+| Public exports | `package.json` | Exposes `components/*`, `icons`, `providers/*`, `hooks/*`; no `src/providers` files exist today. |
 | Storybook | `.storybook/main.ts`, `.storybook/preview.ts` | Centered layout, data-theme decorator, autodocs. |
 | Global CSS | `src/globals.css` | Imports Tailwind and `@workspace/ui-theme/tailwind`. |
 | Icons | `src/icons.ts` | Re-exports `lucide-react`. |
@@ -24,11 +24,11 @@ src/components/button/
 └── index.ts
 ```
 
-Same shape applies to avatar, field, input, menu, password-input, sidebar, skeleton, spinner, toast.
+Same shape applies to alert-dialog, avatar, button, card, dialog, field, input, link, menu, password-input, scroll-area, sidebar, skeleton, spinner, switch, tabs, toast.
 
 ## CONVENTIONS
 
-- Wrap Base UI primitives; re-export primitive namespaces where useful.
+- Wrap Base UI primitives where useful; `toast`, `sidebar`, `card`, and `link` are composite/custom surfaces.
 - Export public component APIs from `index.ts`; many components use `Object.assign(Root, { Sub })`.
 - Type root props as primitive props plus `VariantProps<typeof variants>` when using `tv`.
 - Styling uses Tailwind utility strings through `tv`/`cn`, data attributes, and theme token names.
@@ -54,3 +54,4 @@ pnpm --filter @workspace/ui-react typecheck
 - There is no `build` script for this package today.
 - Biome Tailwind class sorting is configured for `tv`.
 - Storybook docs are the primary manual QA surface for components.
+- `package.json` currently advertises `./providers/*`, but there is no `src/providers` directory.

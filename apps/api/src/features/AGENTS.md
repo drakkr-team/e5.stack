@@ -2,7 +2,7 @@
 
 ## OVERVIEW
 
-Feature-first HTTP modules for the API. Current domain: `user_management`.
+Feature-first HTTP modules for the API. Current domain: `user_management`; keep this file as domain-boundary guidance only.
 
 ## WHERE TO LOOK
 
@@ -12,6 +12,7 @@ Feature-first HTTP modules for the API. Current domain: `user_management`.
 | Generated route targets | `#generated/controllers` | Do not hand-edit generated registry files. |
 | Cross-feature validators | `../validators/user.validator.ts` | Shared by profile/password controllers. |
 | Auth middleware registry | `apps/api/start/kernel.ts` | Named `auth` / `guest` middleware comes from this tree. |
+| Feature docs | `user_management/*/AGENTS.md` | Concrete feature rules live below the domain. |
 
 ## CONVENTIONS
 
@@ -30,4 +31,4 @@ Feature-first HTTP modules for the API. Current domain: `user_management`.
 
 - Current generated controller names are derived from files below `user_management`.
 - Add new domains beside `user_management`, not inside it, when they are not account-related.
-- Keep feature-local AGENTS files only where conventions differ from this root.
+- Keep feature-local AGENTS files only where routes, jobs, mail, or cache behavior differ from this root.

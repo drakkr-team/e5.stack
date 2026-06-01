@@ -2,7 +2,7 @@
 
 ## OVERVIEW
 
-Frontend feature modules. Current domain mirrors the API domain: `user_management`.
+Frontend feature modules. Current domain mirrors the API domain: `user_management`; route files remain under `src/routes`.
 
 ## WHERE TO LOOK
 
@@ -12,6 +12,7 @@ Frontend feature modules. Current domain mirrors the API domain: `user_managemen
 | Shared form wrapper | `../libs/form.ts` | Feature forms should use `useAppForm`. |
 | API client | `../libs/tuyau.ts` | Feature hooks use typed Tuyau query/mutation helpers. |
 | Locale build | `../../scripts/compile-locales.js` | Compiles all `locales/fr.json` files. |
+| Route surfaces | `../routes/(guest)/(auth)/*`, `../routes/(private)/profile/*` | Routes compose feature components. |
 
 ## CONVENTIONS
 
@@ -28,6 +29,6 @@ Frontend feature modules. Current domain mirrors the API domain: `user_managemen
 
 ## NOTES
 
-- Current feature code is auth-only; app shell/profile consumption lives outside `features`.
+- Current feature code covers authentication, password, and profile flows; route composition lives outside `features`.
 - Add one AGENTS file per domain or concrete feature when new conventions appear.
 - Keep API domain spelling (`user_management`) aligned with backend paths.

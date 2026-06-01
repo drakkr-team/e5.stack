@@ -2,23 +2,24 @@
 
 ## OVERVIEW
 
-Password recovery and authenticated password update feature using user tokens and mail templates.
+Password recovery and authenticated password update feature using user tokens, queued mail jobs, and Edge/MJML mail templates.
 
 ## WHERE TO LOOK
 
 | Task | Location | Notes |
 |------|----------|-------|
-| Routes | `routes.ts` | Guest `/auth/forgot-password`, `/auth/reset-password`; auth `/profile/password`. |
+| Routes | `routes.ts` | Guest `POST /user_management/password/forgot`, `POST /user_management/password/reset`; auth `PUT /user_management/password`. |
 | Controllers | `controllers/*.controller.ts` | Forgot/reset/update handlers. |
 | Workflow service | `services/password.service.ts` | Token verification, password updates, mail sending. |
 | Token service | `../../../services/user_token.service.ts` | Generate/verify/revoke token lifecycle. |
+| Jobs | `jobs/*.job.ts` | Dispatch reset/changed emails on queue `emails`. |
 | Mail classes | `mails/*.mail.ts` | Build reset/changed emails. |
 | Mail templates | `mails/*.html.edge` | Edge/MJML templates. |
 
 ## CONVENTIONS
 
-- Forgot/reset routes are guest-only and share `/auth` prefix.
-- Update password route is authenticated and mounted under `/profile` as `profile.updatePassword`.
+- Forgot/reset routes are guest-only under `/user_management/password`.
+- Update password route is authenticated under `/user_management/password`.
 - Token type comes from `UserTokenType` in `src/models/user_token.ts`.
 - Password schemas come from `#validators/user.validator`.
 

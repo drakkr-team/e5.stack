@@ -2,7 +2,7 @@
 
 ## OVERVIEW
 
-TanStack Start React app with file routes, React Query, Tuyau API client, TanStack Form wrappers, next-themes, and generated French i18n bundle.
+TanStack Start app with file routes, React Query, Tuyau API client, TanStack Form wrappers, next-themes, nginx static deployment, and generated French i18n bundle.
 
 ## WHERE TO LOOK
 
@@ -15,9 +15,11 @@ TanStack Start React app with file routes, React Query, Tuyau API client, TanSta
 | Forms | `src/libs/form.ts`, `src/components/form/*` | App fields registered once, reused by features. |
 | Login flow | `src/features/user_management/authentication/**` | Hooks own mutations, redirects, error mapping, form setup. |
 | Password recovery | `src/routes/(guest)/(auth)/forgot-password/page.tsx`, `src/routes/(guest)/(auth)/reset-password/page.tsx` | Forgot/reset password pages using feature form hooks. |
+| Profile tabs | `src/routes/(private)/profile/{layout,page}.tsx`, `src/routes/(private)/profile/{security,privacy}/page.tsx` | Tabs for profile, security, privacy. |
 | i18n | `scripts/compile-locales.js`, `src/**/locales/fr.json`, `src/libs/i18n/config.ts` | Source locales compile to `src/libs/i18n/build/fr.json`. |
 | Providers | `src/providers/*`, `src/routes/__root.tsx` | Theme provider plus TanStack devtools. |
-| App shell | `src/components/app/sidebar/*` | Authenticated menu/theme/logout UI. |
+| App shell | `src/components/app/sidebar/*` | Authenticated sidebar, current user query, theme menu, logout UI. |
+| Deployment | `Dockerfile`, `nginx.conf` | Vite output served from nginx with SPA fallback. |
 
 ## STRUCTURE
 
@@ -36,8 +38,9 @@ apps/web/src/
 
 - Route files are `layout.tsx` and `page.tsx`; route groups use `(private)`, `(guest)`, `(auth)`.
 - Private/guest access is enforced in route `beforeLoad`, not inside page components.
+- Profile settings are route-tabbed: `/profile`, `/profile/security`, `/profile/privacy`.
 - Use `api.*.queryOptions()` / `mutationOptions()` from `src/libs/tuyau.ts`.
-- Clear `api.profile.view.pathKey()` cache after login/logout.
+- Clear `api.userManagement.profile.view.pathKey()` cache after login/logout.
 - Use `useAppForm` from `src/libs/form.ts` for forms so shared field components are available.
 - Translation namespaces mirror feature/component paths.
 - `#/` alias points to `src/*`.
@@ -66,3 +69,4 @@ pnpm --filter @workspace/web i18n:dev
 - `postinstall` generates i18n output automatically.
 - `biome.json` excludes `.tanstack`, `routeTree.gen.ts`, `.output`, and generated locale JSON.
 - Root document imports globals and i18n config before rendering providers.
+- Docker build bakes `VITE_API_BASE_URL`; nginx serves `dist/client` with `_shell.html` fallback.

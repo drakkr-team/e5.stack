@@ -11,7 +11,8 @@ Frontend user-management domain. Current concrete features: authentication (logi
 | Login form and mutations | `authentication/` | Components, hooks, and translations. |
 | Password forms and mutations | `password/` | Forgot/reset (guest) and update (auth) forms. |
 | Profile forms and mutations | `profile/` | Update/delete forms, confirmation dialog. |
-| Route surfaces | `../../routes/(guest)/(auth)/*` | Route files render/auth-gate the feature. |
+| Guest route surfaces | `../../routes/(guest)/(auth)/*` | Login/forgot/reset route files render guest features. |
+| Profile route surfaces | `../../routes/(private)/profile/**` | Profile, security, and privacy tabs compose feature components. |
 | Auth shell UI | `../../components/app/sidebar/*` | Logout mutation consumed by sidebar menu. |
 | Auth helper | `../../utils/auth.ts` | Route guards call `isAuthenticated`. |
 
@@ -25,10 +26,11 @@ Frontend user-management domain. Current concrete features: authentication (logi
 
 - Do not move route guards into feature components.
 - Do not add domain locales outside `locales/fr.json` unless the compiler is updated.
-- Do not duplicate profile cache keys; use `api.profile.view.pathKey()`.
+- Do not duplicate profile cache keys; use `api.userManagement.profile.view.pathKey()`.
 
 ## NOTES
 
 - The login route owns search validation; the feature owns form and mutation behavior.
+- Profile route layout owns tabs; profile/password features own forms and mutations.
 - Sidebar logout consumption is outside this feature but still depends on its logout hook.
 - Add future user-management features beside `authentication`, not inside it.

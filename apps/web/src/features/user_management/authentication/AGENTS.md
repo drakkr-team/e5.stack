@@ -2,7 +2,7 @@
 
 ## OVERVIEW
 
-Login/logout and password-recovery frontend feature built with TanStack Form, Tuyau mutations, React Query cache updates, and colocated French translations.
+Login/logout frontend feature built with TanStack Form, Tuyau mutations, React Query cache updates, and colocated French translations.
 
 ## WHERE TO LOOK
 
@@ -10,26 +10,22 @@ Login/logout and password-recovery frontend feature built with TanStack Form, Tu
 |------|----------|-------|
 | Login UI | `components/login-form.tsx` | Uses `useLoginForm`. |
 | Form setup | `hooks/use-login-form.ts` | Builds `useAppForm` defaults and submit handler. |
-| Login mutation | `hooks/use-login-mutation.ts` | Calls `api.auth.loginWithCredentials`. |
-| Logout mutation | `hooks/use-logout-mutation.ts` | Calls `api.auth.logout`; used by sidebar. |
-| Forgot password UI | `components/forgot-password-form.tsx` | Uses `useForgotPasswordForm`. |
-| Forgot password mutation | `hooks/use-forgot-password-mutation.ts` | Calls `api.auth.password.forgot`. |
-| Reset password UI | `components/reset-password-form.tsx` | Uses `useResetPasswordForm`. |
-| Reset password mutation | `hooks/use-reset-password-mutation.ts` | Calls `api.auth.password.reset`. |
+| Login mutation | `hooks/use-login-mutation.ts` | Calls `api.userManagement.authentication.login`. |
+| Logout mutation | `hooks/use-logout-mutation.ts` | Calls `api.userManagement.authentication.logout`; used by sidebar. |
 | Translations | `locales/fr.json` | Error copy for auth hooks. |
 | Login route | `../../../routes/(guest)/(auth)/login/page.tsx` | Validates `redirectTo` search. |
 
 ## CONVENTIONS
 
 - Form defaults are `{ uid: "", password: "" }`.
-- Login success clears `api.profile.view.pathKey()` and navigates to `redirectTo ?? "/"`.
-- Logout success clears `api.profile.view.pathKey()` and navigates to `/login`.
+- Login success clears `api.userManagement.profile.view.pathKey()` and navigates to `redirectTo ?? "/"`.
+- Logout success clears `api.userManagement.profile.view.pathKey()` and navigates to `/login`.
 - Hook translation namespaces include the full feature path and hook name.
 - Error mappings translate Tuyau network, validation, auth, guest-only, and unexpected cases.
 
 ## ANTI-PATTERNS
 
-- Do not hardcode API paths; use `api.auth.*.mutationOptions()`.
+- Do not hardcode API paths; use the generated `api.userManagement.authentication.*` helpers.
 - Do not bypass `useAppForm`; field components are registered centrally.
 - Do not change backend error codes without updating `locales/fr.json` and hook mappings.
 - `UseLogin*Params = never` placeholders are current style; remove only with a focused hook API cleanup.

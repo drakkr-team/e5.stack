@@ -1,21 +1,21 @@
 # PROJECT KNOWLEDGE BASE
 
-**Generated:** 2026-05-24
-**Commit:** 4e3042a
+**Generated:** 2026-06-01
+**Commit:** 9e399b1
 **Branch:** main
 
 ## OVERVIEW
 
-pnpm/Turbo TypeScript monorepo with an AdonisJS API, TanStack Start web app, and split UI packages for React components plus generated Tailwind theme tokens.
+pnpm/Turbo TypeScript monorepo with an AdonisJS API, TanStack Start web app, and split UI packages for React components plus generated Tailwind theme CSS.
 
 ## STRUCTURE
 
 ```text
 e5.stack/
-├── apps/api/              # AdonisJS API; feature-first user management; generated Tuyau/Adonis artifacts
-├── apps/web/              # TanStack Start app; file routes, Tuyau client, compiled i18n bundle
-├── packages/ui/react/     # Storybook-backed component library; Base UI wrappers
-├── packages/ui/theme/     # token source + generated Tailwind CSS
+├── apps/api/              # AdonisJS API; feature-first user management; Tuyau/Adonis codegen
+├── apps/web/              # TanStack Start app; file routes, Tuyau client, compiled French i18n
+├── packages/ui/react/     # Storybook-backed React UI package; components/icons/hooks exports
+├── packages/ui/theme/     # token source + generated checked-in Tailwind CSS
 ├── package.json           # root Turbo scripts; pnpm@10.33.2; Node 24
 ├── pnpm-workspace.yaml    # workspace globs: apps/*, packages/**
 ├── turbo.json             # task graph
@@ -29,16 +29,17 @@ e5.stack/
 | Root commands / package manager | `package.json`, `turbo.json`, `pnpm-workspace.yaml` | Use pnpm, not npm/yarn. |
 | API runtime / CLI | `apps/api/bin/server.ts`, `apps/api/bin/console.ts`, `apps/api/adonisrc.ts` | `ace.js` is generated. |
 | API routes | `apps/api/start/routes.ts`, `apps/api/src/features/**/routes.ts` | Feature routes import `#generated/controllers`. |
-| API auth/session/mail | `apps/api/config/*.ts`, `apps/api/start/kernel.ts`, `apps/api/src/exceptions/handler.ts` | JSON-only API behavior is middleware-enforced. |
+| API auth/session/mail/queue | `apps/api/config/*.ts`, `apps/api/start/kernel.ts`, `apps/api/src/exceptions/handler.ts` | JSON-only behavior is middleware-enforced; mail jobs use queue `emails`. |
 | Web routes | `apps/web/src/routes/**/{layout,page}.tsx`, `apps/web/src/router.tsx` | `routeTree.gen.ts` is generated. |
 | Web API client | `apps/web/src/libs/tuyau.ts`, `@workspace/api/registry` | Registry comes from the API build hooks. |
 | Web forms | `apps/web/src/libs/form.ts`, `apps/web/src/components/form/*` | TanStack Form components registered centrally. |
-| Web password forms | `apps/web/src/features/user_management/password/**` | Forgot/reset (guest) and update (auth) forms, hooks, mutations. |
+| Web profile routes | `apps/web/src/routes/(private)/profile/**` | Tabs: profile, security, privacy. |
+| Web password forms | `apps/web/src/features/user_management/password/**` | Forgot/reset guest forms and authenticated security-tab update form. |
 | Web profile | `apps/web/src/features/user_management/profile/**` | Update/delete forms, hooks, mutations, and confirmation dialog. |
 | Web translations | `apps/web/scripts/compile-locales.js`, `apps/web/src/**/locales/fr.json` | Build output is generated under `src/libs/i18n/build`. |
 | React UI components | `packages/ui/react/src/components/*` | Folder-per-component with story + barrel. |
 | Theme tokens | `packages/ui/theme/src/tokens.ts` | Source of truth for `tailwind.css`. |
-| Docker / CI | `.github/workflows/ci.yml`, `apps/*/Dockerfile` | CI runs code-quality, typecheck, build; test job is commented out. |
+| Docker / CI | `.github/workflows/ci.yml`, `apps/*/Dockerfile` | CI runs code-quality, affected typecheck/build; test job is commented out. |
 
 ## CODE MAP
 
@@ -51,6 +52,7 @@ e5.stack/
 | `User` | model | `apps/api/src/models/user.ts` | Auth model; `toJSON()` hides password. |
 | `UserTokenService` | service | `apps/api/src/services/user_token.service.ts` | Token generate/verify/revoke workflow. |
 | `middleware` | registry | `apps/api/start/kernel.ts` | Named auth/guest middleware. |
+| `SidebarUserMenu` | component | `apps/web/src/components/app/sidebar/user-menu.tsx` | Current user query, theme menu, logout action. |
 | `Button`, `Menu`, etc. | components | `packages/ui/react/src/components/*/index.ts` | Public UI exports. |
 | `colors`, `fonts` | tokens | `packages/ui/theme/src/tokens.ts` | Theme generation input. |
 
@@ -63,6 +65,7 @@ e5.stack/
 - Web imports use `#/*` for `apps/web/src/*`.
 - Web route files are `layout.tsx` and `page.tsx`; route groups use parentheses.
 - UI component folders use `component.tsx`, `index.ts`, `component.stories.tsx`.
+- `apps/web` runs `i18n:build` on `postinstall`; `dev` runs Vite on port 3000 plus the locale watcher.
 - No `.editorconfig`, `.eslintrc`, or `tailwind.config` files exist; Biome is the single lint/format source.
 - API `tsconfig.json` inherits strictness from `@adonisjs/tsconfig` preset; web/ui packages set `strict: true` locally.
 - API-specific Biome allows non-null assertions and value imports used as types.
@@ -80,13 +83,14 @@ e5.stack/
 
 - API feature modules are colocated by domain under `src/features/user_management` instead of a flat controller/service tree.
 - Web mirrors backend domain names in feature paths and i18n namespaces.
+- Web profile UI is route-tabbed: `/profile`, `/profile/security`, `/profile/privacy`.
 - Theme package checks in generated CSS; edit tokens, then regenerate.
 - Storybook is dev-only for UI React; there is no package build script there.
 - API dev is "composed": Turbo runs `dev` with `docker-compose` and `worker` alongside the server.
 - Web dev uses `concurrently` for Vite port 3000 plus locale watcher.
 - CI uses `--affected` for typecheck and build; `TURBO_SCM_BASE` is explicitly set in CI for PR diffs.
 - API Docker image runs DB migrations in `ENTRYPOINT` before server start.
-- Web Docker image is static-only nginx; `VITE_API_BASE_URL` baked at build time.
+- Web Docker image is static-only nginx serving `dist/client`; `VITE_API_BASE_URL` is baked at build time.
 
 ## COMMANDS
 
@@ -99,7 +103,10 @@ pnpm code-quality
 pnpm code-quality:fix
 pnpm adonis
 pnpm --filter @workspace/api dev
+pnpm --filter @workspace/api worker
+pnpm --filter @workspace/api docker-compose
 pnpm --filter @workspace/web dev
+pnpm --filter @workspace/web preview
 pnpm --filter @workspace/ui-react dev
 pnpm --filter @workspace/ui-theme generate:tailwind
 ```
@@ -107,7 +114,7 @@ pnpm --filter @workspace/ui-theme generate:tailwind
 ## NOTES
 
 - Root `turbo dev` is persistent and uncached.
-- API `dev` depends on the `docker-compose` sidecar task.
+- API `dev` depends on `docker-compose` and `worker` sidecar tasks.
 - `@workspace/api/registry` is generated by Adonis/Tuyau during API build; web type-safety depends on it.
 - `@workspace/ui-theme/tailwind.css` is generated from `src/tokens.ts`; run `generate:tailwind` after token edits.
 - `@workspace/ui-react` has no build script; apps consume its source exports directly.
