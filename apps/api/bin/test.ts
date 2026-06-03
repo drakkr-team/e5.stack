@@ -43,7 +43,8 @@ new Ignitor(APP_ROOT, { importer: IMPORTER })
 	})
 	.testRunner()
 	.configure(async (app) => {
-		const { runnerHooks, ...config } = await import("#tests/bootstrap");
+		// biome-ignore lint/style/noRestrictedImports: We need to import the bootstrap file to get the test runner configuration
+		const { runnerHooks, ...config } = await import("../bootstrap.ts");
 
 		processCLIArgs(process.argv.splice(2));
 		configure({
