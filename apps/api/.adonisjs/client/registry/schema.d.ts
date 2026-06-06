@@ -9,7 +9,7 @@ export type ParamValue = string | number | bigint | boolean
 export interface Registry {
   'user_management.profile.view': {
     methods: ["GET","HEAD"]
-    pattern: '/user_management/profile'
+    pattern: '/user-management/profile'
     types: {
       body: {}
       paramsTuple: []
@@ -21,7 +21,7 @@ export interface Registry {
   }
   'user_management.profile.update': {
     methods: ["PUT"]
-    pattern: '/user_management/profile'
+    pattern: '/user-management/profile'
     types: {
       body: ExtractBody<InferInput<(typeof import('#src/features/user_management/profile/controllers/update.controller').default)['payloadSchema']>>
       paramsTuple: []
@@ -33,7 +33,7 @@ export interface Registry {
   }
   'user_management.profile.delete': {
     methods: ["DELETE"]
-    pattern: '/user_management/profile'
+    pattern: '/user-management/profile'
     types: {
       body: {}
       paramsTuple: []
@@ -45,7 +45,7 @@ export interface Registry {
   }
   'user_management.authentication.login': {
     methods: ["POST"]
-    pattern: '/user_management/authentication/login'
+    pattern: '/user-management/authentication/login'
     types: {
       body: ExtractBody<InferInput<(typeof import('#src/features/user_management/authentication/controllers/login.controller').default)['payloadSchema']>>
       paramsTuple: []
@@ -57,7 +57,7 @@ export interface Registry {
   }
   'user_management.authentication.logout': {
     methods: ["DELETE"]
-    pattern: '/user_management/authentication/logout'
+    pattern: '/user-management/authentication/logout'
     types: {
       body: {}
       paramsTuple: []
@@ -69,7 +69,7 @@ export interface Registry {
   }
   'user_management.password.forgot': {
     methods: ["POST"]
-    pattern: '/user_management/password/forgot'
+    pattern: '/user-management/password/forgot'
     types: {
       body: ExtractBody<InferInput<(typeof import('#src/features/user_management/password/controllers/forgot.controller').default)['payloadSchema']>>
       paramsTuple: []
@@ -81,7 +81,7 @@ export interface Registry {
   }
   'user_management.password.reset': {
     methods: ["POST"]
-    pattern: '/user_management/password/reset'
+    pattern: '/user-management/password/reset'
     types: {
       body: ExtractBody<InferInput<(typeof import('#src/features/user_management/password/controllers/reset.controller').default)['payloadSchema']>>
       paramsTuple: []
@@ -93,7 +93,7 @@ export interface Registry {
   }
   'user_management.password.update': {
     methods: ["PUT"]
-    pattern: '/user_management/password'
+    pattern: '/user-management/password'
     types: {
       body: ExtractBody<InferInput<(typeof import('#src/features/user_management/password/controllers/update.controller').default)['payloadSchema']>>
       paramsTuple: []

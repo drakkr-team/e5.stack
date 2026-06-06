@@ -6,6 +6,12 @@ import { apiClient } from "@japa/api-client";
 import { assert } from "@japa/assert";
 import { pluginAdonisJS } from "@japa/plugin-adonisjs";
 import type { Config } from "@japa/runner/types";
+// biome-ignore lint/style/noRestrictedImports: -
+import type { Registry } from "./.adonisjs/client/registry/schema.d.ts";
+
+declare module "@japa/api-client/types" {
+	interface RoutesRegistry extends Registry {}
+}
 
 export const plugins: Config["plugins"] = [
 	assert(),

@@ -19,5 +19,5 @@ router
 			})
 			.use(middleware.auth({ guards: ["web"] }));
 	})
-	.prefix("/user_management/password")
+	.prefix("/user-management/password")
 	.as("user_management.password");

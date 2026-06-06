@@ -1,7 +1,9 @@
 import { errors as authErrors } from "@adonisjs/auth";
 import { ExceptionHandler, HttpContext } from "@adonisjs/core/http";
 import app from "@adonisjs/core/services/app";
+import type { HttpError } from "@adonisjs/core/types/http";
 import { errors as limiterErrors } from "@adonisjs/limiter";
+import GuestOnlyException from "#exceptions/guest_only.exception";
 import TooManyRequestsException from "#exceptions/too_many_requests.exception";
 import UnauthenticatedException from "#exceptions/unauthenticated.exception";
 import InvalidCredentialsException from "#features/user_management/authentication/exceptions/invalid_credentials.exception";
@@ -48,5 +50,13 @@ export default class HttpExceptionHandler extends ExceptionHandler {
 	 */
 	async report(error: unknown, ctx: HttpContext) {
 		return super.report(error, ctx);
+	}
+
+	protected shouldReport(error: HttpError) {
+		if (error instanceof GuestOnlyException) {
+			return false;
+		}
+
+		return super.shouldReport(error);
 	}
 }

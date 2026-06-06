@@ -11,7 +11,7 @@ router
 			.use(brutForceLimiter);
 		router
 			.delete("/logout", [controllers.features.userManagement.authentication.Logout])
-			.use(middleware.auth());
+			.use(middleware.auth({ guards: ["web"] }));
 	})
-	.prefix("/user_management/authentication")
+	.prefix("/user-management/authentication")
 	.as("user_management.authentication");

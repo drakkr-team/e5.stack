@@ -9,5 +9,5 @@ router
 		router.delete("/", [controllers.features.userManagement.profile.Delete]);
 	})
 	.use(middleware.auth({ guards: ["web"] }))
-	.prefix("/user_management/profile")
+	.prefix("/user-management/profile")
 	.as("user_management.profile");

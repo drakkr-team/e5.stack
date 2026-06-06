@@ -11,5 +11,7 @@ export default class LogoutController {
 		await bouncer.with(LogoutPolicy).authorize("handle");
 
 		await this.authService.logout();
+
+		return null;
 	}
 }
