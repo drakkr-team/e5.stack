@@ -4,11 +4,11 @@ import { Link } from "@workspace/ui-react/components/link";
 import { PasswordInput } from "@workspace/ui-react/components/password-input";
 import { useTranslation } from "react-i18next";
 import {
-	type UseLoginFormOptions,
+	type UseLoginFormParams,
 	useLoginForm,
 } from "#/features/user_management/authentication/hooks/use-login-form";
 
-type LoginFormProps = UseLoginFormOptions;
+type LoginFormProps = UseLoginFormParams;
 
 export function LoginForm(props: LoginFormProps) {
 	const { redirectTo, defaultValues } = props;

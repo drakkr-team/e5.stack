@@ -4,16 +4,13 @@ import { useTranslation } from "react-i18next";
 import { api } from "#/libs/tuyau";
 import { toastifyTuyauError } from "#/utils/tuyau";
 
-type UseLoginMutationParams = never;
-
-type UseLoginMutationOptions = {
+type UseLoginMutationParams = {
 	redirectTo?: string;
 };
 
-export function useLoginMutation(
-	_params?: UseLoginMutationParams,
-	options?: UseLoginMutationOptions,
-) {
+export function useLoginMutation(params?: UseLoginMutationParams) {
+	const { redirectTo = "/" } = params ?? {};
+
 	const { t } = useTranslation("features.user_management.authentication.hooks.use-login-mutation");
 
 	const queryClient = useQueryClient();
@@ -25,7 +22,7 @@ export function useLoginMutation(
 				queryClient.removeQueries({
 					queryKey: api.userManagement.profile.view.pathKey(),
 				});
-				navigate({ to: options?.redirectTo ?? "/" });
+				navigate({ to: redirectTo });
 			},
 			onError: (error) => {
 				toastifyTuyauError(error, {

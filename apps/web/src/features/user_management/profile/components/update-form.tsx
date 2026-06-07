@@ -1,11 +1,11 @@
 import { Card } from "@workspace/ui-react/components/card";
 import { useTranslation } from "react-i18next";
 import {
-	type UseUpdateProfileFormOptions,
+	type UseUpdateProfileFormParams,
 	useUpdateProfileForm,
 } from "#/features/user_management/profile/hooks/use-update-form";
 
-type UpdateProfileFormProps = UseUpdateProfileFormOptions;
+type UpdateProfileFormProps = UseUpdateProfileFormParams;
 
 export function UpdateProfileForm(props: UpdateProfileFormProps) {
 	const { defaultValues } = props;

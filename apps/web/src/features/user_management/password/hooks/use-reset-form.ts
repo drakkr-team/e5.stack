@@ -4,7 +4,7 @@ import z from "zod";
 import { useResetPasswordMutation } from "#/features/user_management/password/hooks/use-reset-mutation";
 import { useAppForm } from "#/libs/form";
 
-export type UseResetPasswordFormOptions = {
+export type UseResetPasswordFormParams = {
 	token: string;
 	defaultValues?: {
 		newPassword?: string;
@@ -12,10 +12,10 @@ export type UseResetPasswordFormOptions = {
 	};
 };
 
-export function useResetPasswordForm(options: UseResetPasswordFormOptions) {
+export function useResetPasswordForm(params: UseResetPasswordFormParams) {
 	const { t } = useTranslation("features.user_management.password.hooks.use-reset-form");
 
-	const { token, defaultValues } = options;
+	const { token, defaultValues } = params;
 
 	const { mutateAsync: resetPassword } = useResetPasswordMutation();
 
@@ -45,12 +45,7 @@ export function useResetPasswordForm(options: UseResetPasswordFormOptions) {
 			onDynamic: schema,
 		},
 		onSubmit: async ({ value }) => {
-			await resetPassword({
-				body: {
-					token: token,
-					...value,
-				},
-			});
+			await resetPassword({ body: { token, ...value } });
 		},
 	});
 }

@@ -4,14 +4,14 @@ import z from "zod";
 import { useForgotPasswordMutation } from "#/features/user_management/password/hooks/use-forgot-mutation";
 import { useAppForm } from "#/libs/form";
 
-export type UseForgotPasswordFormOptions = {
+export type UseForgotPasswordFormParams = {
 	defaultValues?: {
 		email?: string;
 	};
 };
 
-export function useForgotPasswordForm(options?: UseForgotPasswordFormOptions) {
-	const { defaultValues } = options ?? {};
+export function useForgotPasswordForm(params?: UseForgotPasswordFormParams) {
+	const { defaultValues } = params ?? {};
 
 	const { t } = useTranslation("features.user_management.password.hooks.use-forgot-form");
 
@@ -31,9 +31,7 @@ export function useForgotPasswordForm(options?: UseForgotPasswordFormOptions) {
 			onDynamic: schema,
 		},
 		onSubmit: async ({ value }) => {
-			await forgotPassword({
-				body: value,
-			});
+			await forgotPassword({ body: value });
 		},
 	});
 }

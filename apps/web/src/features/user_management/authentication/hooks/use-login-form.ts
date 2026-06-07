@@ -1,7 +1,7 @@
 import { useLoginMutation } from "#/features/user_management/authentication/hooks/use-login-mutation";
 import { useAppForm } from "#/libs/form";
 
-export type UseLoginFormOptions = {
+export type UseLoginFormParams = {
 	redirectTo?: string;
 	defaultValues?: {
 		uid?: string;
@@ -9,10 +9,10 @@ export type UseLoginFormOptions = {
 	};
 };
 
-export function useLoginForm(options?: UseLoginFormOptions) {
-	const { redirectTo, defaultValues } = options ?? {};
+export function useLoginForm(params?: UseLoginFormParams) {
+	const { redirectTo, defaultValues } = params ?? {};
 
-	const { mutateAsync: login } = useLoginMutation(undefined, { redirectTo });
+	const { mutateAsync: login } = useLoginMutation({ redirectTo });
 
 	return useAppForm({
 		defaultValues: {
@@ -21,9 +21,7 @@ export function useLoginForm(options?: UseLoginFormOptions) {
 			...defaultValues,
 		},
 		onSubmit: async ({ value }) => {
-			await login({
-				body: value,
-			});
+			await login({ body: value });
 		},
 	});
 }

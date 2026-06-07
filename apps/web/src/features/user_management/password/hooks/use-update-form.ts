@@ -4,7 +4,7 @@ import z from "zod";
 import { useUpdatePasswordMutation } from "#/features/user_management/password/hooks/use-update-mutation";
 import { useAppForm } from "#/libs/form";
 
-export type UseUpdatePasswordFormOptions = {
+export type UseUpdatePasswordFormParams = {
 	defaultValues?: {
 		currentPassword?: string;
 		newPassword?: string;
@@ -12,8 +12,8 @@ export type UseUpdatePasswordFormOptions = {
 	};
 };
 
-export function useUpdatePasswordForm(options?: UseUpdatePasswordFormOptions) {
-	const { defaultValues } = options ?? {};
+export function useUpdatePasswordForm(params?: UseUpdatePasswordFormParams) {
+	const { defaultValues } = params ?? {};
 
 	const { t } = useTranslation("features.user_management.password.hooks.use-update-form");
 

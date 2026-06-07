@@ -1,10 +1,10 @@
 import { useTranslation } from "react-i18next";
 import {
-	type UseResetPasswordFormOptions,
+	type UseResetPasswordFormParams,
 	useResetPasswordForm,
 } from "#/features/user_management/password/hooks/use-reset-form";
 
-type ResetPasswordFormProps = UseResetPasswordFormOptions;
+type ResetPasswordFormProps = UseResetPasswordFormParams;
 
 export function ResetPasswordForm(props: ResetPasswordFormProps) {
 	const { token, defaultValues } = props;

@@ -1,11 +1,11 @@
 import { Card } from "@workspace/ui-react/components/card";
 import { useTranslation } from "react-i18next";
 import {
-	type UseUpdatePasswordFormOptions,
+	type UseUpdatePasswordFormParams,
 	useUpdatePasswordForm,
 } from "#/features/user_management/password/hooks/use-update-form";
 
-type UpdatePasswordFormProps = UseUpdatePasswordFormOptions;
+type UpdatePasswordFormProps = UseUpdatePasswordFormParams;
 
 export function UpdatePasswordForm(props: UpdatePasswordFormProps) {
 	const { defaultValues } = props;

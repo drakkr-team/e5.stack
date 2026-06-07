@@ -4,14 +4,14 @@ import z from "zod";
 import { useUpdateProfileMutation } from "#/features/user_management/profile/hooks/use-update-mutation";
 import { useAppForm } from "#/libs/form";
 
-export type UseUpdateProfileFormOptions = {
+export type UseUpdateProfileFormParams = {
 	defaultValues?: {
 		name?: string;
 	};
 };
 
-export function useUpdateProfileForm(options?: UseUpdateProfileFormOptions) {
-	const { defaultValues } = options ?? {};
+export function useUpdateProfileForm(params?: UseUpdateProfileFormParams) {
+	const { defaultValues } = params ?? {};
 
 	const { t } = useTranslation("features.user_management.profile.hooks.use-update-form");
 

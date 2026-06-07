@@ -1,10 +1,10 @@
 import { useTranslation } from "react-i18next";
 import {
-	type UseForgotPasswordFormOptions,
+	type UseForgotPasswordFormParams,
 	useForgotPasswordForm,
 } from "#/features/user_management/password/hooks/use-forgot-form";
 
-type ForgotPasswordFormProps = UseForgotPasswordFormOptions;
+type ForgotPasswordFormProps = UseForgotPasswordFormParams;
 
 export function ForgotPasswordForm(props: ForgotPasswordFormProps) {
 	const { defaultValues } = props;
