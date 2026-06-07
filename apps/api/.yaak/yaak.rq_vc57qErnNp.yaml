@@ -2,7 +2,7 @@ type: http_request
 model: http_request
 id: rq_vc57qErnNp
 createdAt: 2026-05-02T13:27:46.607808
-updatedAt: 2026-06-01T18:38:57.966950
+updatedAt: 2026-06-07T08:45:17.339970
 workspaceId: wk_bpdV78RkSs
 folderId: fl_Nx4w5zFUM4
 authentication: {}
@@ -14,7 +14,7 @@ headers: []
 method: GET
 name: View
 sortPriority: -1777728466606.0
-url: ${[ BASE_URL ]}/user_management/profile
+url: ${[ BASE_URL ]}/user-management/profile
 urlParameters: []
 settingSendCookies:
   enabled: false

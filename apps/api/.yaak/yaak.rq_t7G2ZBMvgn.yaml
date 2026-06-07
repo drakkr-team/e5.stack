@@ -2,7 +2,7 @@ type: http_request
 model: http_request
 id: rq_t7G2ZBMvgn
 createdAt: 2026-05-02T13:28:28.871515
-updatedAt: 2026-06-01T18:34:40.019567
+updatedAt: 2026-06-07T08:45:01.564340
 workspaceId: wk_bpdV78RkSs
 folderId: fl_DVi2Fan6si
 authentication: {}
@@ -31,7 +31,7 @@ headers:
 method: POST
 name: Login
 sortPriority: 0.0
-url: ${[ BASE_URL ]}/user_management/authentication/login
+url: ${[ BASE_URL ]}/user-management/authentication/login
 urlParameters: []
 settingSendCookies:
   enabled: false

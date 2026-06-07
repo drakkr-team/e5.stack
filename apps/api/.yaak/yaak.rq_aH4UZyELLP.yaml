@@ -2,7 +2,7 @@ type: http_request
 model: http_request
 id: rq_aH4UZyELLP
 createdAt: 2026-05-18T13:32:37.721347
-updatedAt: 2026-06-01T18:35:03.856029
+updatedAt: 2026-06-07T08:45:13.672279
 workspaceId: wk_bpdV78RkSs
 folderId: fl_e65UGoDWan
 authentication: {}
@@ -31,7 +31,7 @@ headers:
 method: PUT
 name: Update
 sortPriority: 2000.0
-url: ${[ BASE_URL ]}/user_management/password
+url: ${[ BASE_URL ]}/user-management/password
 urlParameters: []
 settingSendCookies:
   enabled: false

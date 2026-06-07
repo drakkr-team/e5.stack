@@ -2,7 +2,7 @@ type: http_request
 model: http_request
 id: rq_XZoQzJK5uV
 createdAt: 2026-05-02T13:29:14.357851
-updatedAt: 2026-06-01T18:34:40.024478
+updatedAt: 2026-06-07T08:45:04.448302
 workspaceId: wk_bpdV78RkSs
 folderId: fl_DVi2Fan6si
 authentication: {}
@@ -14,7 +14,7 @@ headers: []
 method: DELETE
 name: Logout
 sortPriority: 1000.0
-url: ${[ BASE_URL ]}/user_management/authentication/logout
+url: ${[ BASE_URL ]}/user-management/authentication/logout
 urlParameters: []
 settingSendCookies:
   enabled: false

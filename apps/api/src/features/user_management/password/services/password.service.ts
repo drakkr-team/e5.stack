@@ -12,7 +12,7 @@ import env from "#start/env";
 export default class PasswordService {
 	constructor(protected ctx: HttpContext) {}
 
-	async update(params: UpdateDTO["params"]) {
+	async update(params: { currentPassword: string; newPassword: string }) {
 		const { currentPassword, newPassword } = params;
 
 		const user = this.ctx.auth.user!;
@@ -45,7 +45,7 @@ export default class PasswordService {
 		await SendResetPasswordInstruction.dispatch({ user, resetPasswordUrl });
 	}
 
-	async reset(params: ResetPasswordDTO["params"]) {
+	async reset(params: { token: string; newPassword: string }) {
 		const { token, newPassword } = params;
 
 		const userId = encryption.decrypt<number>(token, "user:reset-password");
@@ -62,17 +62,3 @@ export default class PasswordService {
 		});
 	}
 }
-
-type UpdateDTO = {
-	params: {
-		currentPassword: string;
-		newPassword: string;
-	};
-};
-
-type ResetPasswordDTO = {
-	params: {
-		token: string;
-		newPassword: string;
-	};
-};

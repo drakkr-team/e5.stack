@@ -17,7 +17,7 @@ export default class LoginController {
 
 		const { uid, password } = await request.validateUsing(LoginController.payloadSchema);
 
-		const user = await this.authService.login(uid, password);
+		const user = await this.authService.login({ uid, password });
 
 		return this.userPresenter.toJSON(user);
 	}
