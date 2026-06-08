@@ -14,9 +14,9 @@ export function SelectRoot<Value, Multiple extends boolean | undefined = false>(
 	return <SelectPrimitive.Root {...props} />;
 }
 
-export type SelectTriggerProps = SelectPrimitive.Trigger.Props;
+export type SelectInputProps = SelectPrimitive.Trigger.Props;
 
-export function SelectTrigger(props: SelectTriggerProps) {
+export function SelectInput(props: SelectInputProps) {
 	const { children, className, ...rest } = props;
 
 	return (
@@ -66,9 +66,9 @@ export function SelectValue(props: SelectValueProps) {
 	);
 }
 
-export type SelectListProps = Omit<SelectPrimitive.Positioner.Props, "alignItemWithTrigger">;
+export type SelectDropdownProps = Omit<SelectPrimitive.Positioner.Props, "alignItemWithTrigger">;
 
-export function SelectList(props: SelectListProps) {
+export function SelectDropdown(props: SelectDropdownProps) {
 	const {
 		children,
 		className,
@@ -111,9 +111,9 @@ export function SelectList(props: SelectListProps) {
 	);
 }
 
-export type SelectItemProps = SelectPrimitive.Item.Props;
+export type SelectOptionProps = SelectPrimitive.Item.Props;
 
-export function SelectItem(props: SelectItemProps) {
+export function SelectOption(props: SelectOptionProps) {
 	const { children, className, ...rest } = props;
 
 	return (

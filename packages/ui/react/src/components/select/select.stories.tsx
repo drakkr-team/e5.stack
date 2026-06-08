@@ -31,10 +31,10 @@ const meta: Meta<typeof Select> = {
 	},
 	component: Select,
 	subcomponents: {
-		Trigger: Select.Trigger,
+		Input: Select.Input,
 		Value: Select.Value,
-		List: Select.List,
-		Item: Select.Item,
+		Dropdown: Select.Dropdown,
+		Option: Select.Option,
 		Group: Select.Group,
 		GroupLabel: Select.GroupLabel,
 		Separator: Select.Separator,
@@ -120,7 +120,7 @@ const meta: Meta<typeof Select> = {
 		},
 		itemToStringLabel: {
 			description:
-				"When the item values are objects (<Select.Item value={object}>), this function converts the object value to a string representation for display in the trigger. If the shape of the object is { value, label }, the label will be used automatically without needing to specify this prop.",
+				"When the item values are objects (<Select.Option value={object}>), this function converts the object value to a string representation for display in the trigger. If the shape of the object is { value, label }, the label will be used automatically without needing to specify this prop.",
 			table: {
 				type: {
 					summary: "((itemValue: Value) => string) | undefined",
@@ -129,7 +129,7 @@ const meta: Meta<typeof Select> = {
 		},
 		itemToStringValue: {
 			description:
-				"When the item values are objects (<Select.Item value={object}>), this function converts the object value to a string representation for form submission. If the shape of the object is { value, label }, the value will be used automatically without needing to specify this prop.",
+				"When the item values are objects (<Select.Option value={object}>), this function converts the object value to a string representation for form submission. If the shape of the object is { value, label }, the value will be used automatically without needing to specify this prop.",
 			table: {
 				type: {
 					summary: "((itemValue: Value) => string) | undefined",
@@ -221,19 +221,19 @@ export const Default: Story = {
 	},
 	render: (args) => (
 		<Select {...args}>
-			<Select.Trigger className="w-52">
+			<Select.Input className="w-52">
 				<Select.Value placeholder="Select an option" />
-			</Select.Trigger>
+			</Select.Input>
 
-			<Select.List>
+			<Select.Dropdown>
 				{OPTIONS.map((option) => {
 					return (
-						<Select.Item key={option.value} value={option.value} label={option.label}>
+						<Select.Option key={option.value} value={option.value} label={option.label}>
 							{option.label}
-						</Select.Item>
+						</Select.Option>
 					);
 				})}
-			</Select.List>
+			</Select.Dropdown>
 		</Select>
 	),
 };
@@ -245,7 +245,7 @@ export const Multiple: Story = {
 	},
 	render: (args) => (
 		<Select {...args}>
-			<Select.Trigger className="w-52">
+			<Select.Input className="w-52">
 				<Select.Value>
 					{(values: number[]) => {
 						if (values.length === 0) {
@@ -258,17 +258,17 @@ export const Multiple: Story = {
 						return `${firstOption}  ${otherOptions}`;
 					}}
 				</Select.Value>
-			</Select.Trigger>
+			</Select.Input>
 
-			<Select.List>
+			<Select.Dropdown>
 				{OPTIONS.map((option) => {
 					return (
-						<Select.Item key={option.value} value={option.value} label={option.label}>
+						<Select.Option key={option.value} value={option.value} label={option.label}>
 							{option.label}
-						</Select.Item>
+						</Select.Option>
 					);
 				})}
-			</Select.List>
+			</Select.Dropdown>
 		</Select>
 	),
 };
@@ -279,11 +279,11 @@ export const Grouped: Story = {
 	},
 	render: (args) => (
 		<Select {...args}>
-			<Select.Trigger className="w-52">
+			<Select.Input className="w-52">
 				<Select.Value placeholder="Select an option" />
-			</Select.Trigger>
+			</Select.Input>
 
-			<Select.List className="space-y-2">
+			<Select.Dropdown>
 				{GROUPED_OPTIONS.map((group, index) => {
 					return (
 						<Fragment key={group.label}>
@@ -292,21 +292,21 @@ export const Grouped: Story = {
 								<Select.GroupLabel>{group.label}</Select.GroupLabel>
 								{group.value.map((option) => {
 									return (
-										<Select.Item
-											className={"pr-2 pl-4"}
+										<Select.Option
+											className={"pl-4"}
 											key={option.value}
 											value={option.value}
 											label={option.label}
 										>
 											{option.label}
-										</Select.Item>
+										</Select.Option>
 									);
 								})}
 							</Select.Group>
 						</Fragment>
 					);
 				})}
-			</Select.List>
+			</Select.Dropdown>
 		</Select>
 	),
 };

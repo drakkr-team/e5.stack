@@ -1,33 +1,33 @@
 import {
+	SelectDropdown,
 	SelectGroup,
 	SelectGroupLabel,
-	SelectItem,
-	SelectList,
+	SelectInput,
+	SelectOption,
 	SelectRoot,
 	SelectSeparator,
-	SelectTrigger,
 	SelectValue,
 } from "./select";
 
 export { Select as SelectPrimitive } from "@base-ui/react/select";
 
 export const Select = Object.assign(SelectRoot, {
-	Trigger: SelectTrigger,
+	Input: SelectInput,
 	Value: SelectValue,
-	List: SelectList,
-	Item: SelectItem,
+	Dropdown: SelectDropdown,
+	Option: SelectOption,
 	Group: SelectGroup,
 	GroupLabel: SelectGroupLabel,
 	Separator: SelectSeparator,
 });
 
 export type {
+	SelectDropdownProps,
 	SelectGroupLabelProps,
 	SelectGroupProps,
-	SelectItemProps,
-	SelectListProps,
+	SelectInputProps,
+	SelectOptionProps,
 	SelectRootProps as SelectProps,
 	SelectSeparatorProps,
-	SelectTriggerProps,
 	SelectValueProps,
 } from "./select";
