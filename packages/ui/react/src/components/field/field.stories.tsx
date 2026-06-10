@@ -5,6 +5,7 @@ import { Input } from "../input";
 import { PasswordInput } from "../password-input";
 import { Select } from "../select";
 import { Switch } from "../switch";
+import { Textarea } from "../textarea";
 import { Field } from "./index";
 
 const meta: Meta<typeof Field> = {
@@ -67,6 +68,17 @@ export const PasswordField: Story = {
 			<PasswordInput />
 			<Field.Description>Must be at least 8 characters</Field.Description>
 			<Field.Error>Password is too short</Field.Error>
+		</Field>
+	),
+};
+
+export const TextareaField: Story = {
+	render: (args) => (
+		<Field className="grid gap-1" {...args}>
+			<Field.Label>Bio</Field.Label>
+			<Textarea autoResize data-invalid={args.invalid || null} />
+			<Field.Description>Tell us a little about yourself</Field.Description>
+			<Field.Error>Bio is required</Field.Error>
 		</Field>
 	),
 };
