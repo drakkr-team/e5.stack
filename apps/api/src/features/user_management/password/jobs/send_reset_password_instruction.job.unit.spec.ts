@@ -11,7 +11,20 @@ test.group("Features / User Management / Password / Jobs / Send Reset Password I
 		const user = await UserFactory.create();
 		const resetPasswordUrl = new URL("https://app.example.test/reset-password?token=test-token");
 
-		await SendResetPasswordInstruction.dispatch({ user, resetPasswordUrl });
+		const job = new SendResetPasswordInstruction();
+		job.$hydrate(
+			{ user, resetPasswordUrl },
+			{
+				jobId: "test",
+				name: SendResetPasswordInstruction.name,
+				attempt: 1,
+				queue: "default",
+				priority: 5,
+				acquiredAt: new Date(),
+				stalledCount: 0,
+			},
+		);
+		await job.execute();
 
 		fakeMailer.mails.assertSent(ResetPasswordInstructionMail, ({ message }) => {
 			return message.hasTo(user.email);
