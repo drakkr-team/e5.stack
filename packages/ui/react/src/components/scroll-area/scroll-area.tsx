@@ -11,7 +11,7 @@ const ScrollAreaVariant = tv({
 	},
 	variants: {
 		variant: {
-			scollbar: null,
+			scrollbar: null,
 			gradient: {
 				viewport:
 					"data-overflow-x-end:mask-r-from-90% data-overflow-x-start:mask-l-from-90% data-overflow-y-end:mask-b-from-90% data-overflow-y-start:mask-t-from-90%",
