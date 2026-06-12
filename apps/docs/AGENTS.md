@@ -6,3 +6,4 @@
 - Fumadocs MDX generates `.source/**`; treat it as generated.
 - TanStack Router generates `src/routeTree.gen.ts`; treat it as generated.
 - Keep the app statically deployable. Server route handlers must be prerenderable.
+-
