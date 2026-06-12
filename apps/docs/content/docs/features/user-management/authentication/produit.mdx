@@ -1,0 +1,39 @@
+---
+title: Produit
+description: Specification produit de la connexion et de la deconnexion utilisateur.
+---
+
+## Objectif
+
+Permettre a un utilisateur d'ouvrir et de fermer une session sur l'application.
+La session donne acces aux espaces prives, notamment le profil et les actions de
+gestion du compte.
+
+## Acteurs concernes
+
+- Utilisateur non connecte qui veut acceder a son compte.
+- Utilisateur connecte qui veut se deconnecter.
+- Utilisateur redirige vers la connexion apres avoir tente d'ouvrir une page privee.
+
+## Parcours principal
+
+1. L'utilisateur arrive sur la page `Connexion`.
+2. Il saisit son adresse e-mail et son mot de passe.
+3. L'application verifie les identifiants.
+4. En cas de succes, l'utilisateur est connecte et redirige vers la page demandee, ou vers l'accueil si aucune redirection n'est fournie.
+5. Depuis le menu utilisateur de la sidebar, il peut se deconnecter.
+6. Apres deconnexion, l'utilisateur est renvoye vers la page de connexion.
+
+## Regles metier
+
+- La connexion est reservee aux visiteurs non connectes.
+- Une tentative de connexion avec des identifiants invalides affiche une erreur dediee.
+- Trop de tentatives de connexion successives declenchent une erreur de limitation temporaire.
+- Les pages privees redirigent vers la connexion quand aucun utilisateur n'est authentifie.
+- La deconnexion supprime l'etat utilisateur connu par l'interface avant de revenir a la connexion.
+
+## Cas particuliers
+
+- Si un utilisateur deja connecte tente d'ouvrir la page de connexion, l'API renvoie une erreur indiquant que l'action est reservee aux visiteurs.
+- Si la deconnexion est appelee sans session valide, l'API renvoie une erreur d'authentification.
+- Le lien `Mot de passe oublie ?` depuis la connexion envoie vers le parcours de recuperation de mot de passe.

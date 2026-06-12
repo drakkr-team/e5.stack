@@ -1,6 +1,0 @@
-{
-	"defaultOpen": true,
-	"description": "Modele pour separer la documentation produit de la documentation technique.",
-	"pages": ["produit", "technique"],
-	"title": "Modele de documentation"
-}

@@ -1,0 +1,6 @@
+{
+	"defaultOpen": true,
+	"description": "Consultation, mise a jour et suppression du profil utilisateur.",
+	"pages": ["produit", "technique"],
+	"title": "Profil"
+}
