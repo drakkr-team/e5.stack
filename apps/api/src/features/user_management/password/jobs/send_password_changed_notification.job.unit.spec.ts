@@ -13,7 +13,20 @@ test.group(
 			const user = await UserFactory.create();
 			const loginUrl = new URL("https://app.example.test/login");
 
-			await SendPasswordChangedNotification.dispatch({ user, loginUrl });
+			const job = new SendPasswordChangedNotification();
+			job.$hydrate(
+				{ user, loginUrl },
+				{
+					jobId: "test",
+					name: SendPasswordChangedNotification.name,
+					attempt: 1,
+					queue: "default",
+					priority: 5,
+					acquiredAt: new Date(),
+					stalledCount: 0,
+				},
+			);
+			await job.execute();
 
 			fakeMailer.mails.assertSent(PasswordChangedNotificationMail, ({ message }) => {
 				return message.hasTo(user.email);
