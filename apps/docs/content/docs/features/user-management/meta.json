@@ -1,0 +1,6 @@
+{
+	"defaultOpen": true,
+	"description": "Gestion du compte utilisateur, de la session et des donnees personnelles.",
+	"pages": ["authentication", "password", "profile"],
+	"title": "Gestion utilisateur"
+}

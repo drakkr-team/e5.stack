@@ -1,0 +1,98 @@
+---
+title: Technique
+description: Vue technique de la feature Profil.
+---
+
+## Surfaces exposees
+
+Backend :
+
+- `GET /user-management/profile`
+  - Route nommee `user_management.profile.view`.
+  - Route authentifiee avec guard `web`.
+  - Reponse : utilisateur presente sans mot de passe.
+- `PUT /user-management/profile`
+  - Route nommee `user_management.profile.update`.
+  - Route authentifiee avec guard `web`.
+  - Payload : `name` optionnel cote API, valide entre 2 et 254 caracteres quand fourni.
+  - Reponse : utilisateur mis a jour presente sans mot de passe.
+- `DELETE /user-management/profile`
+  - Route nommee `user_management.profile.delete`.
+  - Route authentifiee avec guard `web`.
+  - Reponse : aucun contenu.
+
+Frontend :
+
+- `/profile` affiche la mise a jour des informations personnelles.
+- `/profile/security` est l'onglet de changement de mot de passe.
+- `/profile/privacy` affiche la zone dangereuse de suppression du compte.
+
+## Implementation backend
+
+Les routes profil sont regroupees sous `middleware.auth({ guards: ["web"] })`.
+Chaque controleur passe par une policy Bouncer dediee.
+
+La consultation et la mise a jour renvoient le resultat via `UserPresenter`.
+Le presenter expose uniquement :
+
+- `id`
+- `name`
+- `email`
+- `createdAt`
+- `updatedAt`
+
+La suppression est deleguee a `ProfileService.delete()`, qui :
+
+1. recupere l'utilisateur courant ;
+2. supprime l'utilisateur ;
+3. dispatch `SendAccountDeletedNotification` sur la queue `emails` ;
+4. ferme la session `web`.
+
+## Comportement front
+
+Le layout `/profile` porte les onglets :
+
+- `Informations personnelles`
+- `Securite`
+- `Donnees personnelles`
+
+La page `/profile` charge le profil courant avec `api.userManagement.profile.view.queryOptions()`
+puis initialise le formulaire avec le nom courant.
+
+La mutation de mise a jour appelle `api.userManagement.profile.update`, affiche un toast de
+succes et invalide le cache du profil courant.
+
+La suppression passe par deux composants :
+
+- une section destructive dans l'onglet `Donnees personnelles` ;
+- une boite de confirmation avant appel a la mutation.
+
+La mutation de suppression appelle `api.userManagement.profile.delete`, affiche un toast de
+succes, supprime le cache du profil courant et navigue vers `/login`.
+
+## Erreurs et securite
+
+- `E_UNAUTHENTICATED` protege toutes les routes profil.
+- `E_VALIDATION` couvre les donnees de mise a jour invalides.
+- La suppression est irreversible cote produit et ferme la session.
+- Le front evite l'appel destructif direct en imposant une confirmation utilisateur.
+
+## Tests couverts
+
+Le dossier profil ne contient pas de tests dedies dans l'etat actuel du code inspecte.
+Les comportements critiques sont cependant localises dans les controleurs, le service de
+suppression, les hooks de mutation et les composants de confirmation.
+
+## Sources consultees
+
+- `apps/api/src/features/user_management/profile/routes.ts`
+- `apps/api/src/features/user_management/profile/controllers/*.ts`
+- `apps/api/src/features/user_management/profile/services/profile.service.ts`
+- `apps/api/src/features/user_management/profile/jobs/send_account_deleted_notification.job.ts`
+- `apps/api/src/features/user_management/profile/mails/account_deleted_notification.mail.ts`
+- `apps/api/src/presenters/user.presenter.ts`
+- `apps/web/src/routes/(private)/profile/layout.tsx`
+- `apps/web/src/routes/(private)/profile/page.tsx`
+- `apps/web/src/routes/(private)/profile/privacy/page.tsx`
+- `apps/web/src/features/user_management/profile/components/*.tsx`
+- `apps/web/src/features/user_management/profile/hooks/*.ts`

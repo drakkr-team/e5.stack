@@ -1,0 +1,48 @@
+---
+title: Produit
+description: Specification produit de la recuperation et du changement de mot de passe.
+---
+
+## Objectif
+
+Permettre a un utilisateur de recuperer l'acces a son compte quand il a oublie son mot de
+passe, et permettre a un utilisateur connecte de changer son mot de passe depuis son profil.
+
+## Acteurs concernes
+
+- Visiteur non connecte qui a oublie son mot de passe.
+- Utilisateur non connecte qui ouvre un lien de reinitialisation recu par e-mail.
+- Utilisateur connecte qui veut modifier son mot de passe depuis l'onglet `Securite`.
+
+## Parcours de mot de passe oublie
+
+1. Depuis la connexion, l'utilisateur ouvre `Mot de passe oublie`.
+2. Il saisit son adresse e-mail.
+3. L'application confirme l'envoi des instructions et renvoie vers la connexion.
+4. Si un compte existe pour cette adresse, un e-mail contient un lien vers la page de reinitialisation.
+5. L'utilisateur ouvre ce lien, saisit puis confirme son nouveau mot de passe.
+6. Apres succes, l'utilisateur est renvoye vers la connexion.
+
+## Parcours de changement de mot de passe
+
+1. L'utilisateur connecte ouvre `Mon Profil`, puis l'onglet `Securite`.
+2. Il saisit son mot de passe actuel.
+3. Il saisit et confirme le nouveau mot de passe.
+4. Apres succes, le mot de passe est mis a jour.
+5. L'utilisateur est deconnecte et doit se reconnecter avec le nouveau mot de passe.
+
+## Regles metier
+
+- La demande de reinitialisation ne revele pas si l'adresse e-mail existe.
+- Les parcours `Mot de passe oublie` et `Reinitialisation` sont reserves aux visiteurs non connectes.
+- Le changement de mot de passe depuis le profil exige une session active.
+- Le mot de passe actuel doit etre valide pour changer le mot de passe depuis le profil.
+- Le nouveau mot de passe doit faire entre 8 et 32 caracteres.
+- La confirmation du nouveau mot de passe doit correspondre au nouveau mot de passe.
+- Un e-mail de notification est envoye quand le mot de passe est modifie.
+
+## Cas particuliers
+
+- Un lien de reinitialisation absent, invalide ou expire renvoie vers la connexion avec une erreur.
+- Trop de demandes de reinitialisation ou de tentatives peut declencher une limitation temporaire.
+- Apres modification authentifiee du mot de passe, la session courante est fermee.

@@ -1,0 +1,40 @@
+---
+title: Produit
+description: Specification produit de la consultation, modification et suppression du profil.
+---
+
+## Objectif
+
+Permettre a un utilisateur connecte de consulter les informations de son compte, de modifier
+son nom et de supprimer definitivement son compte.
+
+## Acteurs concernes
+
+- Utilisateur connecte qui consulte son profil.
+- Utilisateur connecte qui modifie ses informations personnelles.
+- Utilisateur connecte qui veut supprimer son compte.
+
+## Parcours principal
+
+1. L'utilisateur connecte ouvre `Mon Profil`.
+2. L'onglet `Informations personnelles` affiche le formulaire de mise a jour du nom.
+3. L'utilisateur modifie son nom et enregistre.
+4. L'application confirme la mise a jour.
+5. L'utilisateur peut ouvrir l'onglet `Donnees personnelles` pour acceder a la zone dangereuse.
+6. La suppression du compte passe par une boite de confirmation.
+7. Apres confirmation, le compte est supprime et l'utilisateur revient a la connexion.
+
+## Regles metier
+
+- Les pages de profil sont reservees aux utilisateurs connectes.
+- Le nom est obligatoire dans l'interface et doit faire entre 2 et 254 caracteres.
+- La suppression du compte est presentee comme irreversible.
+- La suppression demande une confirmation explicite avant d'appeler l'action destructive.
+- Apres suppression, la session est fermee.
+- Un e-mail de confirmation de suppression est envoye.
+
+## Cas particuliers
+
+- Un utilisateur non connecte qui tente d'ouvrir le profil est redirige vers la connexion.
+- Si la session expire pendant l'utilisation du profil, les actions affichent une erreur d'authentification.
+- La mise a jour du profil conserve l'utilisateur sur le profil apres succes.

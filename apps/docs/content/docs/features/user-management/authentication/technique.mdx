@@ -1,0 +1,84 @@
+---
+title: Technique
+description: Vue technique de la feature Connexion.
+---
+
+## Surfaces exposees
+
+Backend :
+
+- `POST /user-management/authentication/login`
+  - Route nommee `user_management.authentication.login`.
+  - Route guest-only avec limitation brute force.
+  - Payload : `uid`, `password`.
+  - Reponse : utilisateur presente sans mot de passe.
+- `DELETE /user-management/authentication/logout`
+  - Route nommee `user_management.authentication.logout`.
+  - Route authentifiee avec guard `web`.
+  - Reponse : aucun contenu.
+
+Frontend :
+
+- `/login` affiche le formulaire de connexion.
+- Le parametre de recherche `redirectTo` permet de revenir a la page privee demandee.
+- Le menu utilisateur de la sidebar consomme la mutation de deconnexion.
+
+## Implementation
+
+Le controleur de login valide `uid` et `password`, autorise l'action via `LoginPolicy`,
+puis delegue la creation de session a `AuthService.login()`.
+Le service utilise `User.verifyCredentials()` et connecte l'utilisateur avec le guard `web`.
+
+Le controleur de logout autorise l'action via `LogoutPolicy`, puis delegue a
+`AuthService.logout()`.
+
+Le presenter utilisateur expose uniquement :
+
+- `id`
+- `name`
+- `email`
+- `createdAt`
+- `updatedAt`
+
+## Comportement front
+
+Le formulaire de connexion utilise `useAppForm` avec les champs `uid` et `password`.
+La mutation appelle `api.userManagement.authentication.login`.
+
+En cas de succes :
+
+- le cache du profil courant est supprime ;
+- l'utilisateur est redirige vers `redirectTo`, ou `/` par defaut.
+
+La deconnexion appelle `api.userManagement.authentication.logout`, supprime aussi le cache du
+profil courant, puis redirige vers `/login`.
+
+## Erreurs et securite
+
+- `E_INVALID_CREDENTIALS` est renvoye quand les identifiants sont invalides.
+- `E_GUEST_ONLY` est renvoye quand un utilisateur connecte appelle une route guest-only.
+- `E_UNAUTHENTICATED` est renvoye quand la deconnexion est appelee sans session.
+- `E_TOO_MANY_REQUESTS` peut etre renvoye par la limitation brute force.
+- Le middleware `silent_auth_middleware` charge l'etat d'authentification sans forcer la session.
+- Les routes privees du front s'appuient sur la requete profil pour determiner si l'utilisateur est authentifie.
+
+## Tests couverts
+
+- Connexion avec identifiants valides.
+- Connexion avec identifiants invalides.
+- Refus de login pour un utilisateur deja authentifie.
+- Deconnexion d'un utilisateur authentifie.
+- Refus de logout sans session.
+- Policies de login et logout.
+
+## Sources consultees
+
+- `apps/api/src/features/user_management/authentication/routes.ts`
+- `apps/api/src/features/user_management/authentication/controllers/*.ts`
+- `apps/api/src/features/user_management/authentication/services/auth.service.ts`
+- `apps/api/src/features/user_management/authentication/policies/*.ts`
+- `apps/api/src/features/user_management/authentication/controllers/*.e2e.spec.ts`
+- `apps/web/src/routes/(guest)/(auth)/login/page.tsx`
+- `apps/web/src/features/user_management/authentication/components/login-form.tsx`
+- `apps/web/src/features/user_management/authentication/hooks/*.ts`
+- `apps/web/src/components/app/sidebar/user-menu.tsx`
